@@ -3,6 +3,7 @@ import * as React from "react";
 import TopBar from "../components/TopBar";
 import FloatingActionButton from "../components/FloatingActionButton";
 import HomeSwiper from "../components/HomeSwiper";
+import StudyCard from "../components/StudyCard";
 
 function HomeScreen() {
   return (
@@ -12,6 +13,9 @@ function HomeScreen() {
         <View style={styles.swiper}>
           <HomeSwiper />
         </View>
+        <ScrollView style={styles.list}>
+          <StudyCard />
+        </ScrollView>
         <FloatingActionButton />
       </View>
     </>
@@ -23,6 +27,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   swiper: { flex: 0.8 },
+  list: { flex: 1 },
 });
 
 export default HomeScreen;
