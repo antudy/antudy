@@ -1,11 +1,15 @@
 import { Text, View } from "react-native";
 import * as React from "react";
+import TopBar from "../components/TopBar";
 
 function HomeScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Home!</Text>
-    </View>
+    <>
+      <TopBar title={"딜리언즈"} />
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>Home!</Text>
+      </View>
+    </>
   );
 }
 
