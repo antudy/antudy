@@ -1,71 +1,45 @@
-import { Image, Text, View, StyleSheet } from "react-native";
+import { Image, Text, View, StyleSheet, Pressable } from "react-native";
 import { Divider } from "react-native-paper";
 
-const studyList = [
-  { name: "이름", location: "위치, 장소", person: "인원" },
-  { name: "이름", location: "위치, 장소", person: "인원" },
-  { name: "이름", location: "위치, 장소", person: "인원" },
-  { name: "이름", location: "위치, 장소", person: "인원" },
-  { name: "이름", location: "위치, 장소", person: "인원" },
-  { name: "이름", location: "위치, 장소", person: "인원" },
-  { name: "이름", location: "위치, 장소", person: "인원" },
-  { name: "이름", location: "위치, 장소", person: "인원" },
-  { name: "이름", location: "위치, 장소", person: "인원" },
-  { name: "이름", location: "위치, 장소", person: "인원" },
-  { name: "이름", location: "위치, 장소", person: "인원" },
-  { name: "이름", location: "위치, 장소", person: "인원" },
-  { name: "이름", location: "위치, 장소", person: "인원" },
-  { name: "이름", location: "위치, 장소", person: "인원" },
-  { name: "이름", location: "위치, 장소", person: "인원" },
-];
-
-const Study = ({ name, location, person }) => {
+const StudyCard = ({ name, location, person }) => {
   return (
     <>
       <Divider style={styles.divider} />
-      <View style={styles.container}>
-        <Image style={styles.image} source={require("../../assets/grey.png")} />
-        <View style={[{ flex: 1 }, styles.rightContainer]}>
-          <Text
-            style={[styles.name, { color: "black" }]}
-            ellipsizeMode="tail"
-            numberOfLines={1}
-          >
-            {name}
-          </Text>
-          <Text
-            style={[styles.location, { color: "black" }]}
-            ellipsizeMode="tail"
-            numberOfLines={1}
-          >
-            {location}
-          </Text>
-          <Text
-            style={[styles.person, { color: "black" }]}
-            ellipsizeMode="tail"
-            numberOfLines={1}
-          >
-            {person}
-          </Text>
-        </View>
-      </View>
-    </>
-  );
-};
-
-const StudyCard = () => {
-  return (
-    <>
-      {studyList.map((v, i) => {
-        return (
-          <Study
-            key={i}
-            name={v.name}
-            location={v.location}
-            person={v.person}
+      <Pressable
+        onPress={() => {
+          console.log("press");
+        }}
+      >
+        <View style={styles.container}>
+          <Image
+            style={styles.image}
+            source={require("../../assets/grey.png")}
           />
-        );
-      })}
+          <View style={[{ flex: 1 }, styles.rightContainer]}>
+            <Text
+              style={[styles.name, { color: "black" }]}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+            >
+              {name}
+            </Text>
+            <Text
+              style={[styles.location, { color: "black" }]}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+            >
+              {location}
+            </Text>
+            <Text
+              style={[styles.person, { color: "black" }]}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+            >
+              {person}
+            </Text>
+          </View>
+        </View>
+      </Pressable>
     </>
   );
 };

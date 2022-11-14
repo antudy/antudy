@@ -5,7 +5,7 @@ Swiper 설명 : https://github.com/leecade/react-native-swiper
 import React from "react";
 import { View, Image, Dimensions } from "react-native";
 import Swiper from "react-native-swiper";
-const { width } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
 const SwiperImage = ({ source }) => {
   return (
@@ -83,7 +83,7 @@ const styles = {
 
   image: {
     width,
-    flex: 1,
+    height,
   },
 };
 
