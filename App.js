@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
+import { SafeAreaView, StatusBar, StyleSheet } from "react-native";
 import BottomTabNavigation from "./src/components/BottomTabNavigation";
 import HomeScreen from "./src/Screens/HomeScreen";
 import ManagementScreen from "./src/Screens/ManagementScreen";
@@ -9,6 +9,11 @@ import ListScreen from "./src/Screens/ListScreen";
 function App() {
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar
+        animated={true}
+        backgroundColor="#61dafb"
+        barStyle="dark-content"
+      />
       <BottomTabNavigation
         screen1={HomeScreen}
         screen2={ManagementScreen}

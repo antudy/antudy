@@ -4,33 +4,28 @@ import TopBar from "../components/TopBar";
 import FloatingActionButton from "../components/FloatingActionButton";
 import HomeSwiper from "../components/HomeSwiper";
 import StudyCard from "../components/StudyCard";
-import { useCallback } from "react";
-
-const studyList = [
-  { name: "이름", location: "위치, 장소", person: "인원", id: 1 },
-  { name: "이름", location: "위치, 장소", person: "인원", id: 2 },
-  { name: "이름", location: "위치, 장소", person: "인원", id: 3 },
-  { name: "이름", location: "위치, 장소", person: "인원", id: 4 },
-  { name: "이름", location: "위치, 장소", person: "인원", id: 5 },
-  { name: "이름", location: "위치, 장소", person: "인원", id: 6 },
-  { name: "이름", location: "위치, 장소", person: "인원", id: 7 },
-  { name: "이름", location: "위치, 장소", person: "인원", id: 8 },
-  { name: "이름", location: "위치, 장소", person: "인원", id: 9 },
-  { name: "이름", location: "위치, 장소", person: "인원", id: 10 },
-  { name: "이름", location: "위치, 장소", person: "인원", id: 11 },
-  { name: "이름", location: "위치, 장소", person: "인원", id: 12 },
-  { name: "이름", location: "위치, 장소", person: "인원", id: 13 },
-  { name: "이름", location: "위치, 장소", person: "인원", id: 14 },
-  { name: "이름", location: "위치, 장소", person: "인원", id: 15 },
-];
+import { useCallback, useEffect, useState } from "react";
+import { db } from "../../firebaseConfig";
+import { query, collection, getDocs } from "firebase/firestore";
 
 function HomeScreen() {
+  const [studyList, setStudyList] = useState([]);
+
+  useEffect(() => {
+    const study = query(collection(db, "study"));
+    getDocs(study).then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        setStudyList((prevState) => [...prevState, doc.data()]);
+      });
+    });
+  }, []);
+
   const renderItem = useCallback(
     ({ item }) => (
       <StudyCard
         name={item.name}
         location={item.location}
-        person={item.person}
+        person={item.members}
       />
     ),
     []
