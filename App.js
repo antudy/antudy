@@ -3,7 +3,7 @@ import { SafeAreaView, StatusBar, StyleSheet } from "react-native";
 import BottomTabNavigation from "./src/components/BottomTabNavigation";
 import HomeScreen from "./src/Screens/HomeScreen";
 import ManagementScreen from "./src/Screens/ManagementScreen";
-import CalendarScreen from "./src/Screens/CalendarScreen";
+import CreateStudy from "./src/Screens/CreateStudy";
 import ListScreen from "./src/Screens/ListScreen";
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
       <BottomTabNavigation
         screen1={HomeScreen}
         screen2={ManagementScreen}
-        screen3={CalendarScreen}
+        screen3={CreateStudy}
         screen4={ListScreen}
       />
     </SafeAreaView>
