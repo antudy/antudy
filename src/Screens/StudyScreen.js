@@ -1,14 +1,11 @@
 import * as React from "react";
-import { Appbar } from "react-native-paper";
-import TopBar from "../components/TopBar";
+import { Text, View } from "react-native";
 
 const StudyScreen = ({ navigation }) => {
   return (
-    <>
-      <TopBar>
-        <Appbar.BackAction onPress={() => navigation.pop()} />
-      </TopBar>
-    </>
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>Study!</Text>
+    </View>
   );
 };
 export default StudyScreen;
