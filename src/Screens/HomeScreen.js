@@ -42,6 +42,10 @@ function HomeScreen({ navigation }) {
 
   const keyExtractor = useCallback((item) => item.id, []);
 
+  const pressFAB = () => {
+    navigation.navigate('CreateStudy');
+  }
+
   return (
     <>
       <TopBar title={"딜리언즈"} />
@@ -56,7 +60,7 @@ function HomeScreen({ navigation }) {
             keyExtractor={keyExtractor}
           />
         </View>
-        <FloatingActionButton />
+        <FloatingActionButton onPress={pressFAB} />
       </View>
     </>
   );
