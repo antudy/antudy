@@ -8,12 +8,15 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import HomeScreen from "../Screens/HomeScreen";
+import ManagementScreen from "../Screens/ManagementScreen";
+import CalendarScreen from "../Screens/CalendarScreen";
+import ListScreen from "../Screens/ListScreen";
 
 const Tab = createBottomTabNavigator();
 
-const BottomTabNavigation = ({ screen1, screen2, screen3, screen4 }) => {
+const BottomTabNavigation = ({navigation}) => {
   return (
-    <NavigationContainer>
       <Tab.Navigator
         screenOptions={{
           tabBarActiveTintColor: "black",
@@ -23,7 +26,7 @@ const BottomTabNavigation = ({ screen1, screen2, screen3, screen4 }) => {
       >
         <Tab.Screen
           name="Home"
-          component={screen1}
+          component={HomeScreen}
           options={{
             title: "홈",
             tabBarIcon: ({ color, size }) => (
@@ -33,7 +36,7 @@ const BottomTabNavigation = ({ screen1, screen2, screen3, screen4 }) => {
         />
         <Tab.Screen
           name="Management"
-          component={screen2}
+          component={ManagementScreen}
           options={{
             title: "관리",
             tabBarIcon: ({ color, size }) => (
@@ -43,7 +46,7 @@ const BottomTabNavigation = ({ screen1, screen2, screen3, screen4 }) => {
         />
         <Tab.Screen
           name="Calendar"
-          component={screen3}
+          component={CalendarScreen}
           options={{
             title: "캘린더",
             tabBarIcon: ({ color, size }) => (
@@ -53,7 +56,7 @@ const BottomTabNavigation = ({ screen1, screen2, screen3, screen4 }) => {
         />
         <Tab.Screen
           name="List"
-          component={screen4}
+          component={ListScreen}
           options={{
             title: "리스트",
             tabBarIcon: ({ color, size }) => (
@@ -62,7 +65,6 @@ const BottomTabNavigation = ({ screen1, screen2, screen3, screen4 }) => {
           }}
         />
       </Tab.Navigator>
-    </NavigationContainer>
   );
 };
 

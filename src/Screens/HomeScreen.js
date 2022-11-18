@@ -8,7 +8,7 @@ import { useCallback, useEffect, useState } from "react";
 import { db } from "../../firebaseConfig";
 import { query, collection, getDocs } from "firebase/firestore";
 
-function HomeScreen() {
+function HomeScreen({navigation}) {
   const [studyList, setStudyList] = useState([]);
 
   useEffect(() => {
@@ -33,6 +33,10 @@ function HomeScreen() {
 
   const keyExtractor = useCallback((item) => item.id, []);
 
+  const pressFAB = () => {
+    navigation.navigate('CreateStudy');
+  }
+
   return (
     <>
       <TopBar title={"딜리언즈"} />
@@ -47,7 +51,7 @@ function HomeScreen() {
             keyExtractor={keyExtractor}
           />
         </View>
-        <FloatingActionButton />
+        <FloatingActionButton onPress={pressFAB} />
       </View>
     </>
   );

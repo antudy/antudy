@@ -6,7 +6,7 @@ import { SelectList } from 'react-native-dropdown-select-list';
 import { useWindowDimensions, StyleSheet, SafeAreaView, View, Platform, Text, Button, Alert, Pressable, onPress, TextInput, Image } from 'react-native';
 
 
-const CreateStudy = () => {
+const CreateStudy = ({navigation}) => {
     const width = useWindowDimensions().width;
     const height = useWindowDimensions().height;
     //const {width, height} = useWindowDimensions();
@@ -57,6 +57,11 @@ const CreateStudy = () => {
     const [text, onChangeText] = React.useState("입력해주세요");
     const [text2, onChangeText2] = React.useState("입력해주세요");
 
+    const pressCreateStudyButton = () => {
+        console.log("Press Button");
+        navigation.navigate('ManagementScreen');
+      }
+
     /** 이미지 업로드 */
     /*
     // 현재 이미지 주소
@@ -88,14 +93,22 @@ const CreateStudy = () => {
     */
     return (
         <SafeAreaView style={styles.container}>
-            <View width={width/1.1} height={height/1.5}>
+            <View width={width/1.1}>
             <View style={styles.createBox} height={height/1.5}>
-                <Text style={styles.textTitle}>제주코딩</Text>
-                {/* <Button
-                    title='Press me'
-                    onPress={()=> Alert.alert('스터디가 생성되었습니다.')}
-                    style={styles.createButton}
-                /> */}
+                <View style={styles.createStudyTitle}>
+                    <Text style={styles.createStudyTitle_text}>스터디명:</Text>
+                    <TextInput
+                            style={styles.createStudyTitle_text_input}
+                            onChangeText={onChangeText}
+                            placeholder="입력해주세요"
+                            value={text}
+                        />
+                    {/* <Button
+                        title='Press me'
+                        onPress={()=> Alert.alert('스터디가 생성되었습니다.')}
+                        style={styles.createButton}
+                    /> */}
+                </View>
                 <View style={styles.viewAll}>
                     <View style={styles.view}>
                         <Text style={styles.text}>위치</Text>
@@ -149,9 +162,7 @@ const CreateStudy = () => {
                 </View>
             </View>
             <View style={styles.joinStudy} height={height/18}>
-                <Pressable style = {styles.joinStudy_button} onPress={()=>{
-                    console.log('스터디 참여하기');
-                    }}>
+                <Pressable style = {styles.joinStudy_button} onPress={pressCreateStudyButton}>
                     <Text style = {styles.joinStudy_text}>새로운 스터디 등록하기</Text>
                 </Pressable>
             </View>
@@ -175,10 +186,18 @@ const styles = StyleSheet.create({
         border: 2,
         borderRadius : 20,
     },
-    textTitle: {
-        fontSize: '30px',
+    createStudyTitle: {
+        flexDirection: 'row',
+        alignItems: 'baseline',
+    },
+    createStudyTitle_text: {
+        fontSize: '18px',
         margin: 30,
+        marginRight: 5,
         marginBottom: 0,
+    },
+    createStudyTitle_text_input:{
+        fontSize: '30px',
     },
     viewAll: {
         flexDirection: 'row',

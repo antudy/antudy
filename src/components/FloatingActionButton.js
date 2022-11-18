@@ -1,10 +1,14 @@
 import * as React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet,Pressable } from "react-native";
 import { FAB } from "react-native-paper";
 
-const FloatingActionButton = () => (
-  <FAB icon="plus" style={styles.fab} onPress={() => console.log("Pressed")} />
-);
+const FloatingActionButton = ({onPress}) => {
+  return (
+    <Pressable onPress={onPress}>
+      <FAB icon="plus" style={styles.fab} />
+    </Pressable> //name값 입력
+  )
+};
 
 const styles = StyleSheet.create({
   fab: {
