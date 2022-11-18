@@ -8,17 +8,25 @@ import { useCallback, useEffect, useState } from "react";
 import { db } from "../../firebaseConfig";
 import { query, collection, getDocs } from "firebase/firestore";
 
-function HomeScreen() {
+function HomeScreen({ navigation }) {
   const [studyList, setStudyList] = useState([]);
 
   useEffect(() => {
     const study = query(collection(db, "study"));
-    getDocs(study).then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        setStudyList((prevState) => [...prevState, doc.data()]);
+    getDocs(study)
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          setStudyList((prevState) => [...prevState, doc.data()]);
+        });
+      })
+      .catch((e) => {
+        console.log(`Error : ${e}`);
       });
-    });
   }, []);
+
+  const pressStudyCard = () => {
+    navigation.navigate("Study");
+  };
 
   const renderItem = useCallback(
     ({ item }) => (
@@ -26,6 +34,7 @@ function HomeScreen() {
         name={item.name}
         location={item.location}
         person={item.members}
+        onPress={pressStudyCard}
       />
     ),
     []
