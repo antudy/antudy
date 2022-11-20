@@ -19,6 +19,7 @@ const StackNavigation = () => {
         <Stack.Screen name="Study" component={StudyScreen} />
         <Stack.Screen name="CreateStudy" component={CreateStudyScreen} />
         <Stack.Screen name="ManagementScreen" component={ManagementScreen} />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );
