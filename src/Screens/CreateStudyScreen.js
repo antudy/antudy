@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 //drop down
-import { SelectList } from "react-native-dropdown-select-list";
+// import { SelectList } from "react-native-dropdown-select-list";
+import DropDownPicker from 'react-native-dropdown-picker';
 //image upload
 // import * as ImagePicker from 'expo-image-picker';
 import {
@@ -23,51 +24,53 @@ const CreateStudyScreen = ({ navigation }) => {
   const height = useWindowDimensions().height;
   //const {width, height} = useWindowDimensions();
 
-  const [selected, setSelected] = React.useState("");
+  const [openLocation, setOpenLocation] = useState(false);
+  const [openPeople, setOpenPeople] = useState(false);
+  const [openCategory, setOpenCategory] = useState(false);
 
-  const data = [
-    { key: "1", value: "서울" },
-    { key: "2", value: "인천" },
-    { key: "3", value: "부산" },
-    { key: "4", value: "대전" },
-    { key: "5", value: "광주" },
-    { key: "6", value: "대구" },
-    { key: "7", value: "울산" },
-    { key: "8", value: "경기도" },
-    { key: "9", value: "강원도" },
-    { key: "10", value: "충청북도" },
-    { key: "11", value: "충청남도" },
-    { key: "12", value: "전라북도" },
-    { key: "13", value: "전라남도" },
-    { key: "14", value: "경상북도" },
-    { key: "14", value: "경상남도" },
-    { key: "15", value: "제주" },
-    { key: "16", value: "세종" },
-    // {key:'4', value:'대전', disabled:true},
-  ];
+  const [valueLocation, setValueLocation] = useState(null);
+  const [valuePeople, setValuePeople] = useState(null);
+  const [valueCategory, setValueCategory] = useState(null);
+  
+  const [itemsLocation, setItemsLocation] = useState([
+    {label: '서울', value: '서울'},
+    {label: '인천', value: '인천'},
+    {label: '부산', value: '부산'},
+    {label: '대전', value: '대전'},
+    {label: '광주', value: '광주'},
+    {label: '대구', value: '대구'},
+    {label: '울산', value: '울산'},
+    {label: '경기도', value: '경기도'},
+    {label: '강원도', value: '강원도'},
+    {label: "충청북도", value: "충청북도"},
+    {label: "충청남도", value: "충청남도"},
+    {label: "전라북도", value: "전라북도"},
+    {label: "전라남도", value: "전라남도"},
+    {label: "경상북도", value: "경상북도"},
+    {label: "경상남도", value: "경상남도"},
+    {label: "제주", value: "제주"},
+    {label: "세종", value: "세종"},
+  ]);
+  const [itemsPeople, setItemsPeople] = useState([
+    { label: "1", value: "1" },
+    { label: "2", value: "2" },
+    { label: "3", value: "3" },
+    { label: "4", value: "4" },
+    { label: "5", value: "5" },
+    { label: "6", value: "6" },
+    { label: "7", value: "7" },
+    { label: "8", value: "8" },
+    { label: "9", value: "9" },
+    { label: "10", value: "10" },
+  ]);
+  const [itemsCategory, setItemsCategory] = useState([
+    { label: "IT/코딩", value: "IT/코딩" },
+    { label: "토익", value: "토익" },
+  ]);
 
-  const CategoryData = [
-    { key: "1", value: "IT/코딩" },
-    { key: "2", value: "토익" },
-    // {key:'4', value:'대전', disabled:true},
-  ];
 
-  const NumberOfPeople = [
-    { key: "1", value: "1" },
-    { key: "2", value: "2" },
-    { key: "3", value: "3" },
-    { key: "4", value: "4" },
-    { key: "5", value: "5" },
-    { key: "6", value: "6" },
-    { key: "7", value: "7" },
-    { key: "8", value: "8" },
-    { key: "9", value: "9" },
-    { key: "10", value: "10" },
-    // {key:'4', value:'대전', disabled:true},
-  ];
-
-  const [text, onChangeText] = React.useState("입력해주세요");
-  const [text2, onChangeText2] = React.useState("입력해주세요");
+  const [text, onChangeText] = React.useState("제목을 입력해주세요");
+  const [text2, onChangeText2] = React.useState("설명을 입력해주세요");
 
   const pressCreateStudyButton = () => {
     console.log("Press Button");
@@ -115,40 +118,60 @@ const CreateStudyScreen = ({ navigation }) => {
               placeholder="입력해주세요"
               value={text}
             />
-            {/* <Button
-                        title='Press me'
-                        onPress={()=> Alert.alert('스터디가 생성되었습니다.')}
-                        style={styles.createButton}
-                    /> */}
           </View>
-          <View style={styles.viewAll}>
+          <View style={styles.viewAll} height={height/5.5}>
             <View style={styles.view}>
               <Text style={styles.text}>위치</Text>
               <Text style={styles.text}>참여가능 인원</Text>
               <Text style={styles.text}>카테고리</Text>
             </View>
             <View style={styles.viewRight}>
-              <SelectList
-                setSelected={(val) => setSelected(val)}
-                data={data}
+              <DropDownPicker
+                open = {openLocation}
+                value = {valueLocation}
+                items = {itemsLocation}
+                setOpen = {setOpenLocation}
+                setValue = {setValueLocation}
+                setItems = {setItemsLocation}
+                zIndex={9999}
+                style={{width: 180}}
+                // onChangeValue = {onChangeValue}
+              />
+              <DropDownPicker
+                open = {openPeople}
+                value = {valuePeople}
+                items = {itemsPeople}
+                setOpen = {setOpenPeople}
+                setValue = {setValuePeople}
+                setItems = {setItemsPeople}
+                zIndex={9998}
+                style={{width: 180}}
+              />
+              <DropDownPicker
+                open = {openCategory}
+                value = {valueCategory}
+                items = {itemsCategory}
+                setOpen = {setOpenCategory}
+                setValue = {setValueCategory}
+                setItems = {setItemsCategory}
+                zIndex={9997}
+                style={{width: 180}}
+              />
+              {/* <SelectList
+                setSelected={(val) => setSelectedLocation(val)}
+                data={locationData}
                 save="value"
                 style={styles.locationList}
-              />
-              <SelectList
-                setSelected={(val) => setSelected(val)}
-                data={NumberOfPeople}
-                save="value"
-                style={styles.textRight}
-              />
-              <SelectList
-                setSelected={(val) => setSelected(val)}
-                data={CategoryData}
-                save="value"
-                style={styles.categoryList}
-              />
+                onSelect = {() => alert(selectedLocation)}
+                label= "Location"
+                placeholder="위치"
+                maxHeight={150}
+                boxStyles	={{zIndex: 999, width: 140, height: 40, backgroundColor: "#F3F3F3",}}
+                dropdownStyles={{zIndex: 999, backgroundColor: "#F3F3F3"}}
+              /> */}
             </View>
           </View>
-          <View>
+          <View style={{zIndex:0,}}>
             <Text style={styles.textDescription}>스터디 상세설명</Text>
             <TextInput
               style={styles.input}
@@ -219,23 +242,37 @@ const styles = StyleSheet.create({
   },
   viewAll: {
     flexDirection: "row",
+    marginTop: 10,
+    marginBottom: 20,
+    marginLeft: 30,
+    zIndex: 9999,
+    // alignItems:'center'
   },
   view: {
     flexDirection: "column",
-    margin: 30,
-    marginTop: 15,
-    marginBottom: 20,
+    justifyContent: 'space-evenly',
+    
+    // marginTop: 20,
+    // marginBottom: 20,
+    // zIndex: 0,
   },
   viewRight: {
     flexDirection: "column",
-    margin: 30,
-    marginTop: 15,
-    marginBottom: 20,
+    justifyContent: 'space-evenly',
+    marginLeft: 50,
+    // width: 180,
+    // height: ,
+    // flex: 1,
+    // margin: 30,
+    // marginTop: 20,
+    // marginBottom: 20,
+    // zIndex: 10,
   },
 
   text: {
     fontSize: "18px",
-    marginTop: 20,
+    
+    // marginTop: 0,s
     // marginLeft: 30,
   },
   textRight: {
