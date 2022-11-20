@@ -71,7 +71,7 @@ const CreateStudyScreen = ({ navigation }) => {
 
   const pressCreateStudyButton = () => {
     console.log("Press Button");
-    navigation.navigate("ManagementScreen");
+    navigation.navigate("Management");
   };
 
   /** 이미지 업로드 */
