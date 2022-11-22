@@ -17,6 +17,7 @@ function HomeScreen({ navigation }) {
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           setStudyList((prevState) => [...prevState, doc.data()]);
+          console.log(doc.data());
         });
       })
       .catch((e) => {
@@ -41,6 +42,7 @@ function HomeScreen({ navigation }) {
   );
 
   const keyExtractor = useCallback((item) => item.id, []);
+  console.log(keyExtractor);
 
   const pressFAB = () => {
     navigation.navigate('CreateStudy');
