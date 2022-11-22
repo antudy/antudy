@@ -1,11 +1,7 @@
 import {initializeApp} from 'firebase/app';
-
 import {createUserWithEmailAndPassword, getAuth} from 'firebase/auth';
-
 import config from '../firebase.json';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-
-
 
 const app = initializeApp(config);
 

@@ -8,6 +8,7 @@ import { Auth } from "firebase/auth";
 import { Alert } from "react-native";
 import { login } from "../firebase";
 
+
 const Background = styled.ImageBackground`
     flex: 1;
     width: 100%;
@@ -48,10 +49,16 @@ const ErrorText = styled.Text`
 `;
 
 const Login = ({ navigation }) => {
+
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const passwordRef = useRef();
+
+    
+ 
+
 
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -65,15 +72,19 @@ const Login = ({ navigation }) => {
     const _handlePasswordChange = password => {
         setPassword(removeWhitespace(password));
     };
+
     const _handleLoginButtonPress = async () => {
         try {
             const user = await login({ email, password});
             Alert.alert('Login Success', user.email);
             console.log('Logged in with:', user.email);
-        } catch(e) {
+            navigation.navigate("Home");
+        } 
+        catch(e) {
             Alert.alert("Login Error", e.message);
         }
     };
+
     const [disabled, setDisabled] = useState(true);
 
     useEffect(() => {
