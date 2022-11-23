@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+import { query, collection, getDocs, where, doc, setDoc, addDoc } from 'firebase/firestore';
+import { db } from "../../firebaseConfig";
+// import * as SecureStore from 'expo-secure-store';
+// import firestore from '@react-native-firebase/firestore';
+import React, { useEffect, useState } from "react";
 //drop down
 import DropDownPicker from 'react-native-dropdown-picker';
 //image upload
@@ -13,6 +17,7 @@ import {
   Pressable,
   TextInput,
 } from "react-native";
+// import { collection } from 'firebase/firestore';
 
 const CreateStudyScreen = ({ navigation }) => {
   const width = useWindowDimensions().width;
@@ -58,7 +63,7 @@ const CreateStudyScreen = ({ navigation }) => {
     { label: "9", value: "9" },
     { label: "10", value: "10" },
   ]);
-  const [itemsCategory, setItemsCategory] = useState([
+  const [itemsCategory, setItemsCategory] = React.useState([
     { label: "IT/코딩", value: "IT/코딩" },
     { label: "토익", value: "토익" },
   ]);
@@ -70,10 +75,36 @@ const CreateStudyScreen = ({ navigation }) => {
   //image 추가
   const [photoUrl, setPhotoUrl] = useState(images.photo);
 
+  //새로운 스터디 등록하기 버튼 클릭 시
   const pressCreateStudyButton = () => {
     console.log("Press Button");
+    //스터디 생성 정보 DB 저장
+    const ANTUDYRef = query(collection(db,"ANTUDY"));
+    addDoc(ANTUDYRef, { 
+      adminTitle: `${text}`,
+      adminLocation: `${valueLocation}`,
+      adminPeople: `${valuePeople}`,
+      adminCategory: `${itemsCategory}`,
+      adminDescription: `${text2}`
+      // adminTitle: "test3",
+      // adminLocation: "test3",
+      // adminPeople: "test3",
+      // adminCategory: "test3" 
+      })
+    .then(()=>{
+      console.log("Document successfully written!", ANTUDYRef.id);
+    })
+    .catch((error) => {
+      console.error("Error writing document: ", error);
+    })
+
+    //화면 전환
     navigation.navigate("ManagementScreen");
   };
+
+  
+  // useEffect(() => {
+   
 
   return (
     <SafeAreaView style={styles.container}>

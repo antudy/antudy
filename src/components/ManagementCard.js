@@ -10,11 +10,11 @@ const ManagementCard = ({ adminTitle, adminLocation, adminPeople, adminCategory}
               <View style= {styles.adminBox} width={width/1.1} height={height/4}>
                 <View style={styles.adminTitle_view}>
                   <Text style={styles.adminTitle_text}>제주코딩</Text>
-                  <Text>{adminTitle}ljj</Text>
+                  <Text>{adminTitle}</Text>
                 </View>
                 <View style={styles.adminLocation_view}>
                   <Text style={styles.adminItem_text}>위치</Text>
-                  <Text>{adminLocation}j</Text>
+                  <Text>{adminLocation}</Text>
                 </View>
                 <View style={styles.adminNumberOfPeople_view}>
                   <Text style={styles.adminItem_text}>인원수</Text>

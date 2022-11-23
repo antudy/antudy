@@ -22,6 +22,7 @@ const ManagementScreen = () => {
   //   }
   // }, []);
 
+  // const a = db.collection("ANTUDY");
   useEffect(() => {
     const ANTUDY = query(collection(db, "ANTUDY"), where("adminUserId", "==", "userId1"));
     getDocs(ANTUDY)
