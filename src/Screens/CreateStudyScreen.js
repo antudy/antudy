@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 //drop down
-import DropDownPicker from 'react-native-dropdown-picker';
+import DropDownPicker from "react-native-dropdown-picker";
 //image upload
-import {images} from '../utils/images';
-import Image_create from '../components/Image_create';
+import { images } from "../utils/images";
+import Image_create from "../components/Image_create";
 import {
   useWindowDimensions,
   StyleSheet,
@@ -26,25 +26,25 @@ const CreateStudyScreen = ({ navigation }) => {
   const [valueLocation, setValueLocation] = useState(null);
   const [valuePeople, setValuePeople] = useState(null);
   const [valueCategory, setValueCategory] = useState(null);
-  
+
   const [itemsLocation, setItemsLocation] = useState([
-    {label: '서울', value: '서울'},
-    {label: '인천', value: '인천'},
-    {label: '부산', value: '부산'},
-    {label: '대전', value: '대전'},
-    {label: '광주', value: '광주'},
-    {label: '대구', value: '대구'},
-    {label: '울산', value: '울산'},
-    {label: '경기도', value: '경기도'},
-    {label: '강원도', value: '강원도'},
-    {label: "충청북도", value: "충청북도"},
-    {label: "충청남도", value: "충청남도"},
-    {label: "전라북도", value: "전라북도"},
-    {label: "전라남도", value: "전라남도"},
-    {label: "경상북도", value: "경상북도"},
-    {label: "경상남도", value: "경상남도"},
-    {label: "제주", value: "제주"},
-    {label: "세종", value: "세종"},
+    { label: "서울", value: "서울" },
+    { label: "인천", value: "인천" },
+    { label: "부산", value: "부산" },
+    { label: "대전", value: "대전" },
+    { label: "광주", value: "광주" },
+    { label: "대구", value: "대구" },
+    { label: "울산", value: "울산" },
+    { label: "경기도", value: "경기도" },
+    { label: "강원도", value: "강원도" },
+    { label: "충청북도", value: "충청북도" },
+    { label: "충청남도", value: "충청남도" },
+    { label: "전라북도", value: "전라북도" },
+    { label: "전라남도", value: "전라남도" },
+    { label: "경상북도", value: "경상북도" },
+    { label: "경상남도", value: "경상남도" },
+    { label: "제주", value: "제주" },
+    { label: "세종", value: "세종" },
   ]);
   const [itemsPeople, setItemsPeople] = useState([
     { label: "1", value: "1" },
@@ -62,7 +62,6 @@ const CreateStudyScreen = ({ navigation }) => {
     { label: "IT/코딩", value: "IT/코딩" },
     { label: "토익", value: "토익" },
   ]);
-
 
   const [text, onChangeText] = React.useState("제목을 입력해주세요");
   const [text2, onChangeText2] = React.useState("설명을 입력해주세요");
@@ -88,7 +87,7 @@ const CreateStudyScreen = ({ navigation }) => {
               value={text}
             />
           </View>
-          <View style={styles.viewAll} height={height/5.5}>
+          <View style={styles.viewAll} height={height / 5.5}>
             <View style={styles.view}>
               <Text style={styles.text}>위치</Text>
               <Text style={styles.text}>참여가능 인원</Text>
@@ -96,39 +95,39 @@ const CreateStudyScreen = ({ navigation }) => {
             </View>
             <View style={styles.viewRight}>
               <DropDownPicker
-                open = {openLocation}
-                value = {valueLocation}
-                items = {itemsLocation}
-                setOpen = {setOpenLocation}
-                setValue = {setValueLocation}
-                setItems = {setItemsLocation}
+                open={openLocation}
+                value={valueLocation}
+                items={itemsLocation}
+                setOpen={setOpenLocation}
+                setValue={setValueLocation}
+                setItems={setItemsLocation}
                 zIndex={9999}
-                style={{width: 180}}
+                style={{ width: 180 }}
                 // onChangeValue = {onChangeValue}
               />
               <DropDownPicker
-                open = {openPeople}
-                value = {valuePeople}
-                items = {itemsPeople}
-                setOpen = {setOpenPeople}
-                setValue = {setValuePeople}
-                setItems = {setItemsPeople}
+                open={openPeople}
+                value={valuePeople}
+                items={itemsPeople}
+                setOpen={setOpenPeople}
+                setValue={setValuePeople}
+                setItems={setItemsPeople}
                 zIndex={9998}
-                style={{width: 180}}
+                style={{ width: 180 }}
               />
               <DropDownPicker
-                open = {openCategory}
-                value = {valueCategory}
-                items = {itemsCategory}
-                setOpen = {setOpenCategory}
-                setValue = {setValueCategory}
-                setItems = {setItemsCategory}
+                open={openCategory}
+                value={valueCategory}
+                items={itemsCategory}
+                setOpen={setOpenCategory}
+                setValue={setValueCategory}
+                setItems={setItemsCategory}
                 zIndex={9997}
-                style={{width: 180}}
+                style={{ width: 180 }}
               />
             </View>
           </View>
-          <View style={{zIndex:0,}}>
+          <View style={{ zIndex: 0 }}>
             <Text style={styles.textDescription}>스터디 상세설명</Text>
             <TextInput
               style={styles.input}
@@ -140,7 +139,7 @@ const CreateStudyScreen = ({ navigation }) => {
           <View>
             <Text style={styles.viewImage}>이미지</Text>
             <View style={styles.ImageBlock}>
-            <Image_create style={styles.Image} url={ images.photo } />
+              <Image_create style={styles.Image} url={images.photo} />
               <Pressable
                 style={styles.createButton}
                 onPress={() => {
@@ -202,11 +201,11 @@ const styles = StyleSheet.create({
   },
   view: {
     flexDirection: "column",
-    justifyContent: 'space-evenly',
+    justifyContent: "space-evenly",
   },
   viewRight: {
     flexDirection: "column",
-    justifyContent: 'space-evenly',
+    justifyContent: "space-evenly",
     marginLeft: 50,
   },
 

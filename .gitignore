@@ -16,7 +16,6 @@ web-build/
 ### Firebase ###
 .idea
 **/node_modules/*
-**/.firebaserc
 firebase.json
 
 ### Firebase Patch ###

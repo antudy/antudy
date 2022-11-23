@@ -1,14 +1,20 @@
-import { query, collection, getDocs, where } from 'firebase/firestore';
+import { query, collection, getDocs, where } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
-import React, { useCallback, useState, useEffect } from 'react';
-import { FlatList, useWindowDimensions, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
-import ManagementCard from '../components/ManagementCard';
+import React, { useCallback, useState, useEffect } from "react";
+import {
+  FlatList,
+  useWindowDimensions,
+  StyleSheet,
+  SafeAreaView,
+} from "react-native";
+import ManagementCard from "../components/ManagementCard";
+import TopBar from "../components/TopBar";
 
 const ManagementScreen = () => {
-    const width = useWindowDimensions().width;
-    const height = useWindowDimensions().height;
+  const width = useWindowDimensions().width;
+  const height = useWindowDimensions().height;
 
-    const [adminList, setAdminList] = useState([]);
+  const [adminList, setAdminList] = useState([]);
 
   //   useEffect( () => {
   //     async function getAdminList(){
@@ -23,7 +29,10 @@ const ManagementScreen = () => {
   // }, []);
 
   useEffect(() => {
-    const ANTUDY = query(collection(db, "ANTUDY"), where("adminUserId", "==", "userId1"));
+    const ANTUDY = query(
+      collection(db, "ANTUDY"),
+      where("adminUserId", "==", "userId1")
+    );
     getDocs(ANTUDY)
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -36,46 +45,45 @@ const ManagementScreen = () => {
       });
   }, []);
 
-    const renderItem = useCallback(
-      ({item}) => (
+  const renderItem = useCallback(
+    ({ item }) => (
       <ManagementCard
         adminTitle={item.adminTitle}
         adminLocation={item.adminLocation}
         adminPeople={item.adminPeople}
         adminCategory={item.adminCategory}
-        />
-      ),
-      []
-    );
+      />
+    ),
+    []
+  );
 
-    const adminStudyCreate = useCallback((item) => item.id, []);
-    console.log(adminStudyCreate);
+  const adminStudyCreate = useCallback((item) => item.id, []);
+  console.log(adminStudyCreate);
 
-    
-    return (
-        <ScrollView>
-          <SafeAreaView style={styles.container}>
-            {/* <ManagementCard 
+  return (
+    <>
+      <TopBar title={"관리"} />
+      <SafeAreaView style={styles.container}>
+        {/* <ManagementCard 
               // data={adminList}
               // renderItem={renderItem}
               // adminStudyCreate={adminStudyCreate}
             /> */}
-            <FlatList
-            data={adminList}
-            renderItem={renderItem}
-            keyExtractor={adminStudyCreate}
-          />
-          </SafeAreaView>
-        </ScrollView>
-      
+        <FlatList
+          data={adminList}
+          renderItem={renderItem}
+          keyExtractor={adminStudyCreate}
+        />
+      </SafeAreaView>
+    </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-      // flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
+    // flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
