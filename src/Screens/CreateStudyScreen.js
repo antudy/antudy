@@ -1,22 +1,17 @@
 import React, { useState } from "react";
 //drop down
-// import { SelectList } from "react-native-dropdown-select-list";
 import DropDownPicker from 'react-native-dropdown-picker';
 //image upload
-// import * as ImagePicker from 'expo-image-picker';
+import {images} from '../utils/images';
+import Image_create from '../components/Image_create';
 import {
   useWindowDimensions,
   StyleSheet,
   SafeAreaView,
   View,
-  Platform,
   Text,
-  Button,
-  Alert,
   Pressable,
-  onPress,
   TextInput,
-  Image,
 } from "react-native";
 
 const CreateStudyScreen = ({ navigation }) => {
@@ -72,40 +67,14 @@ const CreateStudyScreen = ({ navigation }) => {
   const [text, onChangeText] = React.useState("제목을 입력해주세요");
   const [text2, onChangeText2] = React.useState("설명을 입력해주세요");
 
+  //image 추가
+  const [photoUrl, setPhotoUrl] = useState(images.photo);
+
   const pressCreateStudyButton = () => {
     console.log("Press Button");
     navigation.navigate("Management");
   };
 
-  /** 이미지 업로드 */
-  /*
-    // 현재 이미지 주소
-    const [imageUrl, setImageUrl] = useState('');
-    // 권한 요청을 위한 hooks
-    const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
-
-    const uploadImage = async () => {
-        // 권한 확인 코드: 권한 없으면 물어보고, 승인하지 않으면 함수 종료
-        if (!status?.granted) {
-            const permission = await requestPermission();
-            if (!permission.granted) {
-                return null;
-            }
-        }
-        // 이미지 업로드 기능
-        const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images, // 어떤 타입의 파일을 업로드할지 설정이 가능하다.(Images -> 이미지만 받기)
-            allowsEditing: false, // 이미지 업로드 전에 자르기 등의 추가 편집 가능 여부를 설정
-            quality: 1, // 이미지 압축 여부, 1로 설정하면 가장 높은 품질로 파일을 업로드
-            aspect: [1, 1] // 이미지 비율을 설정하는 값
-        });
-        if (result.cancelled){
-            return null; // 이미지 업로드 취소한 경우
-        }
-        console.log(result);
-        setImageUrl(result.uri);
-    };
-    */
   return (
     <SafeAreaView style={styles.container}>
       <View width={width / 1.1}>
@@ -157,18 +126,6 @@ const CreateStudyScreen = ({ navigation }) => {
                 zIndex={9997}
                 style={{width: 180}}
               />
-              {/* <SelectList
-                setSelected={(val) => setSelectedLocation(val)}
-                data={locationData}
-                save="value"
-                style={styles.locationList}
-                onSelect = {() => alert(selectedLocation)}
-                label= "Location"
-                placeholder="위치"
-                maxHeight={150}
-                boxStyles	={{zIndex: 999, width: 140, height: 40, backgroundColor: "#F3F3F3",}}
-                dropdownStyles={{zIndex: 999, backgroundColor: "#F3F3F3"}}
-              /> */}
             </View>
           </View>
           <View style={{zIndex:0,}}>
@@ -183,11 +140,7 @@ const CreateStudyScreen = ({ navigation }) => {
           <View>
             <Text style={styles.viewImage}>이미지</Text>
             <View style={styles.ImageBlock}>
-              <Image
-                style={styles.Image}
-                width={width / 2}
-                // source={{ uri: imageUrl }}
-              />
+            <Image_create style={styles.Image} url={ images.photo } />
               <Pressable
                 style={styles.createButton}
                 onPress={() => {
@@ -246,45 +199,28 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginLeft: 30,
     zIndex: 9999,
-    // alignItems:'center'
   },
   view: {
     flexDirection: "column",
     justifyContent: 'space-evenly',
-    
-    // marginTop: 20,
-    // marginBottom: 20,
-    // zIndex: 0,
   },
   viewRight: {
     flexDirection: "column",
     justifyContent: 'space-evenly',
     marginLeft: 50,
-    // width: 180,
-    // height: ,
-    // flex: 1,
-    // margin: 30,
-    // marginTop: 20,
-    // marginBottom: 20,
-    // zIndex: 10,
   },
 
   text: {
     fontSize: "18px",
-    
-    // marginTop: 0,s
-    // marginLeft: 30,
   },
   textRight: {
     fontSize: "18px",
     marginTop: 20,
-    // marginLeft: 130,
   },
   textDescription: {
     fontSize: "18px",
     marginTop: 0,
     marginLeft: 30,
-    // marginBottom: 110,
   },
   input: {
     backgroundColor: "#F3F3F3",
@@ -314,6 +250,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     borderWidth: 2,
     borderRadius: 10,
+    width: 100,
   },
   createButton: {
     backgroundColor: "#F3F3F3",
@@ -324,15 +261,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 5,
     borderRadius: 10,
-    // alignItems: 'flex-end',
-    // marginRight: 20,
   },
   createText: {
     color: "black",
     fontSize: "16px",
     textAlign: "center",
-    // justifyContent: 'center',
-    // flexDirection: 'center',
   },
   joinStudy: {
     flexDirection: "column",
