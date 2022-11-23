@@ -25,28 +25,30 @@ function HomeScreen({ navigation }) {
       });
   }, []);
 
-  const pressStudyCard = () => {
-    navigation.navigate("Study");
-  };
-
-  const renderItem = useCallback(
-    ({ item }) => (
+  const renderItem = useCallback(({ item }) => {
+    const pressStudyCard = () => {
+      navigation.navigate("JoinStudy", {
+        studyName: item.name,
+        location: item.location,
+        members: item.members,
+      });
+    };
+    return (
       <StudyCard
         name={item.name}
         location={item.location}
         person={item.members}
         onPress={pressStudyCard}
       />
-    ),
-    []
-  );
+    );
+  }, []);
 
   const keyExtractor = useCallback((item) => item.id, []);
   console.log(keyExtractor);
 
   const pressFAB = () => {
-    navigation.navigate('CreateStudy');
-  }
+    navigation.navigate("CreateStudy");
+  };
 
   return (
     <>
