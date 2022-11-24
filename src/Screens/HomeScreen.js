@@ -1,6 +1,8 @@
+/*
+홈화면
+ */
 import { FlatList, StyleSheet, View } from "react-native";
 import * as React from "react";
-import TopBar from "../components/TopBar";
 import FloatingActionButton from "../components/FloatingActionButton";
 import HomeSwiper from "../components/HomeSwiper";
 import StudyCard from "../components/StudyCard";
@@ -51,22 +53,19 @@ function HomeScreen({ navigation }) {
   };
 
   return (
-    <>
-      <TopBar title={"딜리언즈"} />
-      <View style={styles.container}>
-        <View style={styles.swiper}>
-          <HomeSwiper />
-        </View>
-        <View style={styles.list}>
-          <FlatList
-            data={studyList}
-            renderItem={renderItem}
-            keyExtractor={keyExtractor}
-          />
-        </View>
-        <FloatingActionButton onPress={pressFAB} />
+    <View style={styles.container}>
+      <View style={styles.swiper}>
+        <HomeSwiper />
       </View>
-    </>
+      <View style={styles.list}>
+        <FlatList
+          data={studyList}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
+        />
+      </View>
+      <FloatingActionButton onPress={pressFAB} />
+    </View>
   );
 }
 

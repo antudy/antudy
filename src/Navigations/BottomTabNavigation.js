@@ -1,4 +1,5 @@
 /*
+하단 탭
 Screen 설명 : https://reactnavigation.org/docs/screen/#name
 options 설명 : https://reactnavigation.org/docs/bottom-tab-navigator
 Ionicons : https://ionic.io/ionicons
@@ -16,15 +17,24 @@ import {
 
 const Tab = createBottomTabNavigator();
 
-const BottomTabNavigation = () => {
+const BottomTabNavigation = ({ navigation }) => {
+  const pressSearchButton = () => {
+    navigation.navigate("Search");
+  };
+
   return (
     <Tab.Navigator
       screenOptions={{
         tabBarActiveTintColor: "black",
-        headerShown: false,
+        headerTitleAlign: "center",
+        headerRight: () => (
+          <Ionicons name="search" size={24} onPress={pressSearchButton} />
+        ),
+        headerRightContainerStyle: { right: 20 },
       }}
     >
       <Tab.Screen
+        // 홈 화면
         name="Home"
         component={HomeScreen}
         options={{
@@ -35,6 +45,7 @@ const BottomTabNavigation = () => {
         }}
       />
       <Tab.Screen
+        // 참여중 화면
         name="Join"
         component={JoinScreen}
         options={{
@@ -45,6 +56,7 @@ const BottomTabNavigation = () => {
         }}
       />
       <Tab.Screen
+        // 관리중 화면
         name="Management"
         component={ManagementScreen}
         options={{
@@ -55,6 +67,7 @@ const BottomTabNavigation = () => {
         }}
       />
       <Tab.Screen
+        // 내 정보 화면
         name="MyAccount"
         component={AccountScreen}
         options={{
