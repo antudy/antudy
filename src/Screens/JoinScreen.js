@@ -1,11 +1,11 @@
 import { Text, View } from "react-native";
 import * as React from "react";
 
-const CalendarScreen = () => {
+const JoinScreen = () => {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Calendar!</Text>
+      <Text>Join!</Text>
     </View>
   );
 };
-export default CalendarScreen;
+export default JoinScreen;
