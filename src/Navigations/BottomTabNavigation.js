@@ -1,4 +1,5 @@
 /*
+하단 탭
 Screen 설명 : https://reactnavigation.org/docs/screen/#name
 options 설명 : https://reactnavigation.org/docs/bottom-tab-navigator
 Ionicons : https://ionic.io/ionicons
@@ -7,23 +8,33 @@ Ionicons : https://ionic.io/ionicons
 import * as React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import HomeScreen from "../Screens/HomeScreen";
-import ManagementScreen from "../Screens/ManagementScreen";
-import CalendarScreen from "../Screens/CalendarScreen";
-import ListScreen from "../Screens/ListScreen";
+import {
+  HomeScreen,
+  JoinScreen,
+  ManagementScreen,
+  AccountScreen,
+} from "../Screens";
 
 const Tab = createBottomTabNavigator();
 
-const BottomTabNavigation = () => {
+const BottomTabNavigation = ({ navigation }) => {
+  const pressSearchButton = () => {
+    navigation.navigate("Search");
+  };
+
   return (
     <Tab.Navigator
       screenOptions={{
         tabBarActiveTintColor: "black",
-        tabBarShowLabel: false,
-        headerShown: false,
+        headerTitleAlign: "center",
+        headerRight: () => (
+          <Ionicons name="search" size={24} onPress={pressSearchButton} />
+        ),
+        headerRightContainerStyle: { right: 20 },
       }}
     >
       <Tab.Screen
+        // 홈 화면
         name="Home"
         component={HomeScreen}
         options={{
@@ -34,32 +45,35 @@ const BottomTabNavigation = () => {
         }}
       />
       <Tab.Screen
+        // 참여중 화면
+        name="Join"
+        component={JoinScreen}
+        options={{
+          title: "참여중",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="layers" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        // 관리중 화면
         name="Management"
         component={ManagementScreen}
         options={{
-          title: "관리",
+          title: "관리중",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="library" color={color} size={size} />
           ),
         }}
       />
       <Tab.Screen
-        name="Calendar"
-        component={CalendarScreen}
+        // 내 정보 화면
+        name="MyAccount"
+        component={AccountScreen}
         options={{
-          title: "캘린더",
+          title: "내정보",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="calendar" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="List"
-        component={ListScreen}
-        options={{
-          title: "리스트",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="list" color={color} size={size} />
+            <Ionicons name="person" color={color} size={size} />
           ),
         }}
       />
