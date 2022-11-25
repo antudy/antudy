@@ -19,6 +19,7 @@ import {
   TextInput,
   Button,
 } from "react-native";
+import { auth } from "../../firebaseConfig";
 
 const CreateStudyScreen = ({ navigation }) => {
   const width = useWindowDimensions().width;
@@ -92,22 +93,25 @@ const CreateStudyScreen = ({ navigation }) => {
   }
 };
 
+//현재 userid 가져오기
+const user = auth.currentUser;
+const uid = user.uid;
+console.log(uid);
+
+
   //새로운 스터디 등록하기 버튼 클릭 시
   const pressCreateStudyButton = () => {
     console.log("Press Button");
     //스터디 생성 정보 DB 저장
     const ANTUDYRef = query(collection(db,"ANTUDY"));
     addDoc(ANTUDYRef, { 
+      adminuid: `${uid}`,
       adminTitle: `${text}`,
       adminLocation: `${valueLocation}`,
       adminPeople: `${valuePeople}`,
       adminCategory: `${valueCategory}`,
       adminDescription: `${text2}`,
       adminImage: `${selectedImage}`
-      // adminTitle: "test3",
-      // adminLocation: "test3",
-      // adminPeople: "test3",
-      // adminCategory: "test3" 
       })
     .then(()=>{
       console.log("Document successfully written!", ANTUDYRef.id);
@@ -119,6 +123,8 @@ const CreateStudyScreen = ({ navigation }) => {
     //화면 전환
     navigation.navigate("Management");
   };
+
+  
 
   return (
     <SafeAreaView style={styles.container}>
