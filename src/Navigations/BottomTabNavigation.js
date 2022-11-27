@@ -12,7 +12,7 @@ import {
   HomeScreen,
   JoinScreen,
   ManagementScreen,
-  AccountScreen,
+  MyInfo,
 } from "../Screens";
 
 const Tab = createBottomTabNavigator();
@@ -68,8 +68,8 @@ const BottomTabNavigation = ({ navigation }) => {
       />
       <Tab.Screen
         // 내 정보 화면
-        name="MyAccount"
-        component={AccountScreen}
+        name="MyInfo"
+        component={MyInfo}
         options={{
           title: "내정보",
           tabBarIcon: ({ color, size }) => (

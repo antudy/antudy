@@ -6,7 +6,7 @@ import JoinStudyScreen from "./JoinStudyScreen";
 import StudyListScreen from "./StudyListScreen";
 import ManagementScreen from "./ManagementScreen";
 import JoinScreen from "./JoinScreen";
-import AccountScreen from "./AccountScreen";
+import MyInfo from "./MyInfo";
 import SearchScreen from "./SearchScreen";
 
 export {
@@ -18,6 +18,6 @@ export {
   StudyListScreen,
   ManagementScreen,
   JoinScreen,
-  AccountScreen,
+  MyInfo,
   SearchScreen,
 };
