@@ -9,15 +9,16 @@ const MyInfo = () => {
 
     return(
         <View style={styles.container}>
+            
+            <View style={styles.MyInfoTitle}>
             <Text style={styles.Text}>
-                내정보                  <TouchableOpacity style={{backgroundColor: 'red',
-                padding:7,
-                margin:20,
-                borderRaduis: 8,}}
-                    onPress={() => alert('click')}>
-                        <Text style={{color: 'white', fotSize: 12}}>Sign out</Text>
-                </TouchableOpacity>
-            </Text>
+                내정보
+            </Text>                  
+            <TouchableOpacity style={styles.Signout}
+            onPress={() => alert('click')}>
+            <Text style={{color: 'white', fontSize: 18}}>Sign out</Text>
+            </TouchableOpacity>
+            </View>
                 <TextInput style={styles.InfoBox}
                     multiline
                     onChangeText={onChangeText}
@@ -49,30 +50,38 @@ const MyInfo = () => {
 
 const styles = StyleSheet.create({
     container:{
-        alignItems:'center',
-        justifyContent:'center',
+        padding: 20,
         backgroundColor: '#FFFFFF',
         flex:1,
     },
+    MyInfoTitle:{
+        marginTop: 15,
+        flexDirection:'row',
+        marginBottom: 15,
+        justifyContent:'space-between',
+    },
+    Signout:{
+        backgroundColor: 'red',
+        justifyContent:'center',
+        padding: 10,
+    },
     InfoBox:{
         backgroundColor:"#FF8730",
-        width:'90%',
+        width:'100%',
         flex:1,
     },
     IngBox:{
         backgroundColor:"#B2B2B2",
-        width:'90%',
+        width:'100%',
         marginTop:10,
         marginBottom:30,
         flex:2,
     },
     Text:{
-        Color:"black",
         fontSize:36,
-        alignSelf:'flex-start',
-        marginTop:40,
-        marginLeft:30,
-        marginBottom:10,
+        // marginTop:40,
+        // marginLeft:30,
+        // marginBottom:10,
     },
     buttonText:{
         Color:"black",
