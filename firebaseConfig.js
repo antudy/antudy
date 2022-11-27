@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from "firebase/firestore";
+import { collection, getDocs, getFirestore, query } from "firebase/firestore";
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -25,4 +25,18 @@ export const login = async ({ email, password }) => {
 export const signup = async ({ email, password }) => {
   const { user } = await createUserWithEmailAndPassword(auth, email, password);
   return user;
+};
+
+export const loadStudy = (setState) => {
+  const study = query(collection(db, "study"));
+  getDocs(study)
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        setState((prevState) => [...prevState, doc.data()]);
+        console.log(doc.data());
+      });
+    })
+    .catch((e) => {
+      console.log(`Error : ${e}`);
+    });
 };

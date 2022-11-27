@@ -8,8 +8,6 @@ import {
   SafeAreaView,
 } from "react-native";
 import ManagementCard from "../components/ManagementCard";
-import TopBar from "../components/TopBar";
-import { auth } from "../../firebaseConfig";
 
 const ManagementScreen = () => {
   const width = useWindowDimensions().width;
@@ -68,21 +66,18 @@ const ManagementScreen = () => {
   console.log(adminStudyCreate);
 
   return (
-    <>
-      <TopBar title={"관리"} />
-      <SafeAreaView style={styles.container}>
-        {/* <ManagementCard 
+    <SafeAreaView style={styles.container}>
+      {/* <ManagementCard 
               // data={adminList}
               // renderItem={renderItem}
               // adminStudyCreate={adminStudyCreate}
             /> */}
-        <FlatList
-          data={adminList}
-          renderItem={renderItem}
-          keyExtractor={adminStudyCreate}
-        />
-      </SafeAreaView>
-    </>
+      <FlatList
+        data={adminList}
+        renderItem={renderItem}
+        keyExtractor={adminStudyCreate}
+      />
+    </SafeAreaView>
   );
 };
 

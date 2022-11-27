@@ -7,6 +7,7 @@ import {
   CreateStudyScreen,
   JoinStudyScreen,
   StudyListScreen,
+  SearchScreen,
 } from "../Screens";
 
 const Stack = createStackNavigator();
@@ -20,6 +21,7 @@ const StackNavigation = () => {
           headerTitleAlign: "center",
           cardStyle: { backgroundColor: "white" },
           headerTintColor: "black",
+          headerBackTitleVisible: false,
         }}
       >
         <Stack.Screen
@@ -43,6 +45,7 @@ const StackNavigation = () => {
         <Stack.Screen name="JoinStudy" component={JoinStudyScreen} />
         <Stack.Screen name="StudyList" component={StudyListScreen} />
         <Stack.Screen name="CreateStudy" component={CreateStudyScreen} />
+        <Stack.Screen name="Search" component={SearchScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

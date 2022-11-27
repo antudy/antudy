@@ -5,6 +5,9 @@ import CreateStudyScreen from "./CreateStudyScreen";
 import JoinStudyScreen from "./JoinStudyScreen";
 import StudyListScreen from "./StudyListScreen";
 import ManagementScreen from "./ManagementScreen";
+import JoinScreen from "./JoinScreen";
+import AccountScreen from "./AccountScreen";
+import SearchScreen from "./SearchScreen";
 
 export {
   HomeScreen,
@@ -14,4 +17,7 @@ export {
   JoinStudyScreen,
   StudyListScreen,
   ManagementScreen,
+  JoinScreen,
+  AccountScreen,
+  SearchScreen,
 };

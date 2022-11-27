@@ -49,7 +49,7 @@ const SignupScreen = () => {
       } else if (!validateEmail(email)) {
         _errorMessage = "이메일을 입력해주세요.";
       } else if (password.length < 6) {
-        _errorMessage = "6자 이상의 이메일을 입력해주세요.";
+        _errorMessage = "6자 이상의 비밀번호를 입력해주세요.";
       } else if (password !== passwordConfirm) {
         _errorMessage = "입력하신 비밀번호가 일치하지 않습니다.";
       } else {
