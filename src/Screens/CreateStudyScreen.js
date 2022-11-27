@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+import { query, collection, getDocs, where, doc, setDoc, addDoc, getFirestore } from 'firebase/firestore';
+import { db } from "../../firebaseConfig";
+import * as ImagePicker from 'expo-image-picker';
+// import * as SecureStore from 'expo-secure-store';
+// import firestore from '@react-native-firebase/firestore';
+import React, { useEffect, useState } from "react";
 //drop down
 import DropDownPicker from "react-native-dropdown-picker";
 //image upload
@@ -12,7 +17,9 @@ import {
   Text,
   Pressable,
   TextInput,
+  Button,
 } from "react-native";
+import { auth } from "../../firebaseConfig";
 
 const CreateStudyScreen = ({ navigation }) => {
   const width = useWindowDimensions().width;
@@ -67,12 +74,58 @@ const CreateStudyScreen = ({ navigation }) => {
   const [text2, onChangeText2] = React.useState("설명을 입력해주세요");
 
   //image 추가
-  const [photoUrl, setPhotoUrl] = useState(images.photo);
+  const [selectedImage, setSelectedImage] = useState(images.photo);
 
+  const pickImageAsync = async () => {
+   // No permissions request is necessary for launching the image library
+   let result = await ImagePicker.launchImageLibraryAsync({
+    // mediaTypes: ImagePicker.MediaTypeOptions.All,
+    allowsEditing: true,
+    // aspect: [4, 3],
+    quality: 1,
+  });
+  
+  if (!result.canceled) {
+    console.log(result);
+    setSelectedImage(result.uri);
+  } else {
+    alert('You did not select any image.');
+  }
+};
+
+//현재 userid 가져오기
+const user = auth.currentUser;
+const uid = user.uid;
+// console.log(uid);
+
+
+  //새로운 스터디 등록하기 버튼 클릭 시
   const pressCreateStudyButton = () => {
     console.log("Press Button");
+    //스터디 생성 정보 DB 저장
+    const ANTUDYRef = query(collection(db,"ANTUDY"));
+    addDoc(ANTUDYRef, { 
+      adminUid: `${uid}`, //관리자UserId
+      adminTitle: `${text}`, //스터디 이름
+      adminLocation: `${valueLocation}`, //위치
+      adminPeople: `${valuePeople}`, //참여가능인원수(MAX_참가자)
+      adminCategory: `${valueCategory}`, //카테고리
+      adminDescription: `${text2}`, //상세설명
+      adminImage: `${selectedImage}` //이미지
+      //대기UserId, 참여UserId, TodoList는 스터디 생성 이후 추가.
+      })
+    .then(()=>{
+      console.log("Document successfully written!", ANTUDYRef.id);
+    })
+    .catch((error) => {
+      console.error("Error writing document: ", error);
+    })
+
+    //화면 전환
     navigation.navigate("Management");
   };
+
+  
 
   return (
     <SafeAreaView style={styles.container}>
@@ -139,15 +192,18 @@ const CreateStudyScreen = ({ navigation }) => {
           <View>
             <Text style={styles.viewImage}>이미지</Text>
             <View style={styles.ImageBlock}>
-              <Image_create style={styles.Image} url={images.photo} />
-              <Pressable
+              {/* <Image_create style={styles.Image} url={images.photo} /> */}
+              <Image_create style={styles.Image} url={selectedImage} />
+              {/* <Pressable
                 style={styles.createButton}
                 onPress={() => {
                   console.log("image upload");
+                  {pickImageAsync}
                 }}
               >
                 <Text style={styles.createText}>업로드</Text>
-              </Pressable>
+              </Pressable> */}
+              <Button title="업로드" theme="primary" label="Choose a photo" onPress={pickImageAsync} />
             </View>
           </View>
         </View>

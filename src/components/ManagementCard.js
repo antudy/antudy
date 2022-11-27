@@ -19,20 +19,20 @@ const ManagementCard = ({
     <View style={styles.adminList} width={width / 1.1}>
       <View style={styles.adminBox} width={width / 1.1} height={height / 4}>
         <View style={styles.adminTitle_view}>
-          <Text style={styles.adminTitle_text}>제주코딩</Text>
-          <Text>{adminTitle}</Text>
+          {/* <Text style={styles.adminTitle_text}>제주코딩</Text> */}
+          <Text style={styles.adminTitle_text}>{adminTitle}</Text>
         </View>
         <View style={styles.adminLocation_view}>
-          <Text style={styles.adminItem_text}>위치</Text>
-          <Text>{adminLocation}</Text>
+          <Text style={styles.adminItem_text}>위치 : </Text>
+          <Text style={styles.adminItem_text}>{adminLocation}</Text>
         </View>
         <View style={styles.adminNumberOfPeople_view}>
-          <Text style={styles.adminItem_text}>인원수</Text>
-          <Text>{adminPeople}</Text>
+          <Text style={styles.adminItem_text}>인원 : </Text>
+          <Text style={styles.adminItem_text}>{adminPeople}</Text>
         </View>
         <View style={styles.adminCategory_view}>
-          <Text style={styles.adminItem_text}>카테고리</Text>
-          <Text>{adminCategory}</Text>
+          <Text style={styles.adminItem_text}>카테고리 : </Text>
+          <Text style={styles.adminItem_text}>{adminCategory}</Text>
         </View>
         <View style={styles.adminModify_view}>
           <Pressable
@@ -41,7 +41,15 @@ const ManagementCard = ({
               console.log("관리중인 스터디 수정하기");
             }}
           >
-            <Text style={styles.adminModify_text}>수정</Text>
+            <Text style={styles.adminModify_text}>관리</Text>
+          </Pressable>
+          <Pressable
+            style={styles.adminModify_button}
+            onPress={() => {
+              console.log("관리중인 스터디 수정하기");
+            }}
+          >
+            <Text style={styles.adminModify_text}>삭제</Text>
           </Pressable>
         </View>
       </View>
@@ -77,17 +85,22 @@ const styles = StyleSheet.create({
   },
   adminItem_text: {
     fontSize: "18px",
+    // marginRight: 20,
   },
   adminLocation_view: {
     flex: 1,
+    flexDirection: "row",
+    // justifyContent: ""
     // backgroundColor:'orange',
   },
   adminNumberOfPeople_view: {
     flex: 1,
+    flexDirection: "row",
     // backgroundColor:'yellow',
   },
   adminCategory_view: {
     flex: 1,
+    flexDirection: "row",
     // backgroundColor:'green',
   },
   adminModify_view: {
@@ -98,6 +111,7 @@ const styles = StyleSheet.create({
   adminModify_button: {},
   adminModify_text: {
     fontSize: "18px",
+    marginLeft: 15,
   },
 });
 

@@ -65,6 +65,7 @@ const LoginScreen = ({ navigation }) => {
     try {
       const user = await login({ email, password });
       console.log("Logged in with:", user.email);
+      // console.log("user.uid:", user.uid);
       navigation.navigate("Main");
     } catch (e) {
       Alert.alert("LoginScreen Error", e.message);
@@ -76,6 +77,9 @@ const LoginScreen = ({ navigation }) => {
   useEffect(() => {
     setDisabled(!(email && password && !errorMessage));
   }, [email, password, errorMessage]);
+
+  // const user = firebase.auth().currentUser;
+  // console.log(user);
 
   return (
     <Background source={images.background} resizeMode="cover">

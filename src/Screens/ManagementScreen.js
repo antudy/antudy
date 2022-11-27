@@ -1,5 +1,5 @@
 import { query, collection, getDocs, where } from "firebase/firestore";
-import { db } from "../../firebaseConfig";
+import { db, auth } from "../../firebaseConfig";
 import React, { useCallback, useState, useEffect } from "react";
 import {
   FlatList,
@@ -27,10 +27,16 @@ const ManagementScreen = () => {
   //   }
   // }, []);
 
+  //현재 userid 가져오기
+  const user = auth.currentUser;
+  const uid = user.uid;
+  // console.log(uid);
+
+  //관리 중인 스터디 목록 가져오기
   useEffect(() => {
     const ANTUDY = query(
       collection(db, "ANTUDY"),
-      where("adminUserId", "==", "userId1")
+      where("adminUid", "==", uid)
     );
     getDocs(ANTUDY)
       .then((querySnapshot) => {
