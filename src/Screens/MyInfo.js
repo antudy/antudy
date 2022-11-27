@@ -14,8 +14,8 @@ const MyInfo = () => {
                 padding:7,
                 margin:20,
                 borderRaduis: 8,}}
-                    onPress={() => alert('Rogout!')}>
-                        <Text style={{color: 'white', fontSize: 12}}>Sign out</Text>
+                    onPress={() => alert('click')}>
+                        <Text style={{color: 'white', fotSize: 12}}>Sign out</Text>
                 </TouchableOpacity>
             </Text>
                 <TextInput style={styles.InfoBox}
