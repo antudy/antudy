@@ -105,7 +105,7 @@ const uid = user.uid;
     //스터디 생성 정보 DB 저장
     const ANTUDYRef = query(collection(db,"ANTUDY"));
     addDoc(ANTUDYRef, { 
-      adminUserId: `${uid}`, //관리자UserId
+      adminUid: `${uid}`, //관리자UserId
       adminTitle: `${text}`, //스터디 이름
       adminLocation: `${valueLocation}`, //위치
       adminPeople: `${valuePeople}`, //참여가능인원수(MAX_참가자)
