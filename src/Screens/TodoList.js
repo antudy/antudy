@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, ScrollView } from 'react-native'
-import TodoListItem from './TodoListItem'
+import TodoListItem from '../components/TodoListItem'
 
 const TodoList = ({Todos, onRemove, onToggle}) => {
     return (
