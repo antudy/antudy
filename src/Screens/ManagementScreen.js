@@ -9,9 +9,12 @@ import {
 } from "react-native";
 import ManagementCard from "../components/ManagementCard";
 
-const ManagementScreen = () => {
+const ManagementScreen = ({navigation}) => {
   const width = useWindowDimensions().width;
   const height = useWindowDimensions().height;
+  const pressModify = () => {
+    navigation.navigate('ModifyStudy')
+  }
 
   const [adminList, setAdminList] = useState([]);
 
@@ -57,6 +60,7 @@ const ManagementScreen = () => {
         adminLocation={item.adminLocation}
         adminPeople={item.adminPeople}
         adminCategory={item.adminCategory}
+        onPress={pressModify}
       />
     ),
     []
