@@ -23,6 +23,8 @@ const MyInfo = () => {
                     multiline
                     onChangeText={onChangeText}
                     value={text}
+                    underlineColor="transparent"
+                    theme={{ roundness: 0 }} 
                 />
             <View style={styles.IngBox}>
                 <TouchableOpacity style={{backgroundColor:'#FFFFFF',padding:20,margin:12,borderRadius:8,}}
@@ -79,9 +81,6 @@ const styles = StyleSheet.create({
     },
     Text:{
         fontSize:36,
-        // marginTop:40,
-        // marginLeft:30,
-        // marginBottom:10,
     },
     buttonText:{
         Color:"black",
