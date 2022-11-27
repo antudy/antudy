@@ -1,5 +1,5 @@
 import { query, collection, getDocs, where } from "firebase/firestore";
-import { db } from "../../firebaseConfig";
+import { db, auth } from "../../firebaseConfig";
 import React, { useCallback, useState, useEffect } from "react";
 import {
   FlatList,
