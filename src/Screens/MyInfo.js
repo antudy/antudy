@@ -2,7 +2,7 @@ import * as React from "react";
 import { Text, View, StyleSheet, Dimensions, TouchableOpacity,} from "react-native"
 import { Button, TextInput } from "react-native-paper";
 const { width, height } = Dimensions.get("window");
-import { Ionicons } from '@expo/vector-icons';
+
 
 const MyInfo = () => {
     const [text, onChangeText] = React.useState("내 정보를 입력해주세요!");
@@ -10,9 +10,16 @@ const MyInfo = () => {
     return(
         <View style={styles.container}>
             <Text style={styles.Text}>
-                내정보                    <TouchableOpacity><Ionicons style={styles.icon} name="settings" size={35} color="black" /></TouchableOpacity>
+                내정보                  <TouchableOpacity style={{backgroundColor: 'red',
+                padding:7,
+                margin:20,
+                borderRaduis: 8,}}
+                    onPress={() => alert('click')}>
+                        <Text style={{color: 'white', fotSize: 12}}>Sign out</Text>
+                </TouchableOpacity>
             </Text>
                 <TextInput style={styles.InfoBox}
+                    multiline
                     onChangeText={onChangeText}
                     value={text}
                 />
@@ -63,13 +70,18 @@ const styles = StyleSheet.create({
         Color:"black",
         fontSize:36,
         alignSelf:'flex-start',
-        marginTop:50,
+        marginTop:40,
         marginLeft:30,
         marginBottom:10,
     },
     buttonText:{
         Color:"black",
         fontSize:30,
+    },
+    title:{
+        fontSize:20,
+        color:"white",
+        textAlign:'center',
     }
 })
 
