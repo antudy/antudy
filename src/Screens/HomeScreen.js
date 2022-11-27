@@ -7,24 +7,13 @@ import FloatingActionButton from "../components/FloatingActionButton";
 import HomeSwiper from "../components/HomeSwiper";
 import StudyCard from "../components/StudyCard";
 import { useCallback, useEffect, useState } from "react";
-import { db } from "../../firebaseConfig";
-import { query, collection, getDocs } from "firebase/firestore";
+import { loadStudy } from "../../firebaseConfig";
 
 function HomeScreen({ navigation }) {
   const [studyList, setStudyList] = useState([]);
 
   useEffect(() => {
-    const study = query(collection(db, "study"));
-    getDocs(study)
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          setStudyList((prevState) => [...prevState, doc.data()]);
-          console.log(doc.data());
-        });
-      })
-      .catch((e) => {
-        console.log(`Error : ${e}`);
-      });
+    loadStudy(setStudyList);
   }, []);
 
   const renderItem = useCallback(({ item }) => {
@@ -33,6 +22,7 @@ function HomeScreen({ navigation }) {
         studyName: item.name,
         location: item.location,
         members: item.members,
+        category: item.category,
       });
     };
     return (

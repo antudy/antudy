@@ -2,7 +2,7 @@ import { StyleSheet, View, Text, Image, Pressable } from "react-native";
 import * as React from "react";
 
 function JoinStudyScreen({ navigation, route }) {
-  const { studyName, location, members } = route.params;
+  const { studyName, location, members, category } = route.params;
 
   const pressJoinButton = () => {
     navigation.navigate("StudyList");
@@ -26,7 +26,7 @@ function JoinStudyScreen({ navigation, route }) {
         <View style={styles.text}>
           <Text style={styles.text_position}>위치 : {location}</Text>
           <Text style={styles.text_person}>인원 : {members}</Text>
-          <Text style={styles.text_category}>카테고리 :</Text>
+          <Text style={styles.text_category}>카테고리 : {category}</Text>
         </View>
         <View style={styles.study_explain}>
           <Text style={styles.text_explain}>스터디 상세설명</Text>
