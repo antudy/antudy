@@ -72,7 +72,7 @@ const ModifyScreen = ({ navigation }) => {
 
   const pressModifyButton = () => {
     console.log("Press Button");
-    navigation.navigate("Management");
+    navigation.navigate("ModifyStudy");
   };
 
   return (
