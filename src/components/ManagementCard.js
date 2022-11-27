@@ -11,6 +11,7 @@ const ManagementCard = ({
   adminLocation,
   adminPeople,
   adminCategory,
+  onPress,
 }) => {
   const width = useWindowDimensions().width;
   const height = useWindowDimensions().height;
@@ -37,9 +38,7 @@ const ManagementCard = ({
         <View style={styles.adminModify_view}>
           <Pressable
             style={styles.adminModify_button}
-            onPress={() => {
-              console.log("관리중인 스터디 수정하기");
-            }}
+            onPress={onPress}
           >
             <Text style={styles.adminModify_text}>수정</Text>
           </Pressable>
