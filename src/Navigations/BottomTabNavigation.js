@@ -10,7 +10,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import {
   HomeScreen,
-  JoinScreen,
+  ParticipatingScreen,
   ManagementScreen,
   MyInfo,
 } from "../Screens";
@@ -47,7 +47,7 @@ const BottomTabNavigation = ({ navigation }) => {
       <Tab.Screen
         // 참여중 화면
         name="Join"
-        component={JoinScreen}
+        component={ParticipatingScreen}
         options={{
           title: "참여중",
           tabBarIcon: ({ color, size }) => (
