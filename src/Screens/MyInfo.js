@@ -71,8 +71,6 @@ const styles = StyleSheet.create({
         backgroundColor:"#FF8730",
         width:'100%',
         flex:1,
-    
-        
     },
     IngBox:{
         backgroundColor:"#B2B2B2",
@@ -83,9 +81,6 @@ const styles = StyleSheet.create({
     },
     Text:{
         fontSize:36,
-        // marginTop:40,
-        // marginLeft:30,
-        // marginBottom:10,
     },
     buttonText:{
         Color:"black",
