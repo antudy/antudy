@@ -27,6 +27,10 @@ export const signup = async ({ email, password }) => {
   return user;
 };
 
+export const logout = async () => {
+  return await auth.signOut();
+};
+
 export const loadStudy = (setState) => {
   const study = query(collection(db, "study"));
   getDocs(study)

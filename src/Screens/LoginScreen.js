@@ -50,6 +50,7 @@ const LoginScreen = ({ navigation }) => {
 
   const [errorMessage, setErrorMessage] = useState("");
 
+  //이메일 유효성 검사
   const _handleEmailChange = (email) => {
     const changedEmail = removeWhitespace(email);
     setEmail(changedEmail);
@@ -57,10 +58,13 @@ const LoginScreen = ({ navigation }) => {
       validateEmail(changedEmail) ? "" : "올바른 이메일을 입력해주세요."
     );
   };
+
+  //비밀번호 유효성 검사
   const _handlePasswordChange = (password) => {
     setPassword(removeWhitespace(password));
   };
 
+  //로그인 버튼
   const _handleLoginButtonPress = async () => {
     try {
       const user = await login({ email, password });
