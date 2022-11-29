@@ -1,6 +1,15 @@
-import { query, collection, getDocs, where, doc, setDoc, addDoc, getFirestore } from 'firebase/firestore';
+import {
+  query,
+  collection,
+  getDocs,
+  where,
+  doc,
+  setDoc,
+  addDoc,
+  getFirestore,
+} from "firebase/firestore";
 import { db } from "../../firebaseConfig";
-import * as ImagePicker from 'expo-image-picker';
+import * as ImagePicker from "expo-image-picker";
 // import * as SecureStore from 'expo-secure-store';
 // import firestore from '@react-native-firebase/firestore';
 import React, { useEffect, useState } from "react";
@@ -77,55 +86,52 @@ const CreateStudyScreen = ({ navigation }) => {
   const [selectedImage, setSelectedImage] = useState(images.photo);
 
   const pickImageAsync = async () => {
-   // No permissions request is necessary for launching the image library
-   let result = await ImagePicker.launchImageLibraryAsync({
-    // mediaTypes: ImagePicker.MediaTypeOptions.All,
-    allowsEditing: true,
-    // aspect: [4, 3],
-    quality: 1,
-  });
-  
-  if (!result.canceled) {
-    console.log(result);
-    setSelectedImage(result.uri);
-  } else {
-    alert('You did not select any image.');
-  }
-};
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      // mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      // aspect: [4, 3],
+      quality: 1,
+    });
 
-//현재 userid 가져오기
-const user = auth.currentUser;
-const uid = user.uid;
-// console.log(uid);
+    if (!result.canceled) {
+      console.log(result);
+      setSelectedImage(result.uri);
+    } else {
+      alert("You did not select any image.");
+    }
+  };
 
+  //현재 userid 가져오기
+  const user = auth.currentUser;
+  const uid = user.uid;
+  // console.log(uid);
 
   //새로운 스터디 등록하기 버튼 클릭 시
   const pressCreateStudyButton = () => {
     console.log("Press Button");
     //스터디 생성 정보 DB 저장
-    const ANTUDYRef = query(collection(db,"ANTUDY"));
-    addDoc(ANTUDYRef, { 
+    const ANTUDYRef = query(collection(db, "ANTUDY"));
+    addDoc(ANTUDYRef, {
       adminUid: `${uid}`, //관리자UserId
       adminTitle: `${text}`, //스터디 이름
       adminLocation: `${valueLocation}`, //위치
       adminPeople: `${valuePeople}`, //참여가능인원수(MAX_참가자)
       adminCategory: `${valueCategory}`, //카테고리
       adminDescription: `${text2}`, //상세설명
-      adminImage: `${selectedImage}` //이미지
+      adminImage: `${selectedImage}`, //이미지
       //대기UserId, 참여UserId, TodoList는 스터디 생성 이후 추가.
+    })
+      .then(() => {
+        console.log("Document successfully written!", ANTUDYRef.id);
       })
-    .then(()=>{
-      console.log("Document successfully written!", ANTUDYRef.id);
-    })
-    .catch((error) => {
-      console.error("Error writing document: ", error);
-    })
+      .catch((error) => {
+        console.error("Error writing document: ", error);
+      });
 
     //화면 전환
     navigation.navigate("Management");
   };
-
-  
 
   return (
     <SafeAreaView style={styles.container}>
@@ -203,7 +209,12 @@ const uid = user.uid;
               >
                 <Text style={styles.createText}>업로드</Text>
               </Pressable> */}
-              <Button title="업로드" theme="primary" label="Choose a photo" onPress={pickImageAsync} />
+              <Button
+                title="업로드"
+                theme="primary"
+                label="Choose a photo"
+                onPress={pickImageAsync}
+              />
             </View>
           </View>
         </View>
@@ -240,13 +251,13 @@ const styles = StyleSheet.create({
     alignItems: "baseline",
   },
   createStudyTitle_text: {
-    fontSize: "18px",
+    fontSize: 18,
     margin: 30,
     marginRight: 5,
     marginBottom: 0,
   },
   createStudyTitle_text_input: {
-    fontSize: "30px",
+    fontSize: 30,
   },
   viewAll: {
     flexDirection: "row",
@@ -266,20 +277,20 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    fontSize: "18px",
+    fontSize: 18,
   },
   textRight: {
-    fontSize: "18px",
+    fontSize: 18,
     marginTop: 20,
   },
   textDescription: {
-    fontSize: "18px",
+    fontSize: 18,
     marginTop: 0,
     marginLeft: 30,
   },
   input: {
     backgroundColor: "#F3F3F3",
-    fontSize: "18px",
+    fontSize: 18,
     marginTop: 10,
     paddingBottom: 110,
     marginLeft: 30,
@@ -289,7 +300,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   viewImage: {
-    fontSize: "18px",
+    fontSize: 18,
     marginTop: 20,
     marginLeft: 30,
   },
@@ -319,7 +330,7 @@ const styles = StyleSheet.create({
   },
   createText: {
     color: "black",
-    fontSize: "16px",
+    fontSize: 16,
     textAlign: "center",
   },
   joinStudy: {
@@ -331,7 +342,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   joinStudy_text: {
-    fontSize: "20px",
+    fontSize: 20,
   },
 });
 
