@@ -8,12 +8,7 @@ Ionicons : https://ionic.io/ionicons
 import * as React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import {
-  HomeScreen,
-  JoinScreen,
-  ManagementScreen,
-  MyInfo,
-} from "../Screens";
+import { HomeScreen, JoinScreen, ManagementScreen, MyInfo } from "../Screens";
 
 const Tab = createBottomTabNavigator();
 
@@ -75,6 +70,7 @@ const BottomTabNavigation = ({ navigation }) => {
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="person" color={color} size={size} />
           ),
+          headerShown: false,
         }}
       />
     </Tab.Navigator>

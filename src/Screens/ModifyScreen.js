@@ -77,92 +77,78 @@ const ModifyScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      
       <View width={width / 1.1}>
-      
         <View style={styles.createBox} height={height / 1.3}>
           <ScrollView>
-          <View style={styles.createStudyTitle}>
-            <Text style={styles.createStudyTitle_text}>제주코딩</Text>
-            <Pressable
+            <View style={styles.createStudyTitle}>
+              <Text style={styles.createStudyTitle_text}>제주코딩</Text>
+              <Pressable
                 style={styles.createButton}
                 onPress={pressModifyButton}
               >
                 <Text style={styles.createText}>완료</Text>
               </Pressable>
-          </View>
-          <View style={styles.viewAll} height={height / 5.5}>
-            <View style={styles.view}>
-              <Text style={styles.text}>위치</Text>
-              <Text style={styles.text}>참여가능 인원</Text>
-              <Text style={styles.text}>카테고리</Text>
             </View>
-            <View style={styles.viewRight}>
-              <DropDownPicker
-                open={openLocation}
-                value={valueLocation}
-                items={itemsLocation}
-                setOpen={setOpenLocation}
-                setValue={setValueLocation}
-                setItems={setItemsLocation}
-                zIndex={9999}
-                style={{ width: 150 }}
-                // onChangeValue = {onChangeValue}
-              />
-              <DropDownPicker
-                open={openPeople}
-                value={valuePeople}
-                items={itemsPeople}
-                setOpen={setOpenPeople}
-                setValue={setValuePeople}
-                setItems={setItemsPeople}
-                zIndex={9998}
-                style={{ width: 150 }}
-              />
-              <DropDownPicker
-                open={openCategory}
-                value={valueCategory}
-                items={itemsCategory}
-                setOpen={setOpenCategory}
-                setValue={setValueCategory}
-                setItems={setItemsCategory}
-                zIndex={9997}
-                style={{ width: 150 }}
-              />
+            <View style={styles.viewAll} height={height / 5.5}>
+              <View style={styles.view}>
+                <Text style={styles.text}>위치</Text>
+                <Text style={styles.text}>참여가능 인원</Text>
+                <Text style={styles.text}>카테고리</Text>
+              </View>
+              <View style={styles.viewRight}>
+                <DropDownPicker
+                  open={openLocation}
+                  value={valueLocation}
+                  items={itemsLocation}
+                  setOpen={setOpenLocation}
+                  setValue={setValueLocation}
+                  setItems={setItemsLocation}
+                  zIndex={9999}
+                  style={{ width: 150 }}
+                  // onChangeValue = {onChangeValue}
+                />
+                <DropDownPicker
+                  open={openPeople}
+                  value={valuePeople}
+                  items={itemsPeople}
+                  setOpen={setOpenPeople}
+                  setValue={setValuePeople}
+                  setItems={setItemsPeople}
+                  zIndex={9998}
+                  style={{ width: 150 }}
+                />
+                <DropDownPicker
+                  open={openCategory}
+                  value={valueCategory}
+                  items={itemsCategory}
+                  setOpen={setOpenCategory}
+                  setValue={setValueCategory}
+                  setItems={setItemsCategory}
+                  zIndex={9997}
+                  style={{ width: 150 }}
+                />
+              </View>
             </View>
-          </View>
-          
-          <View>
-            <Text style={styles.viewImage}>이미지</Text>
-            <View style={styles.ImageBlock}>
-              <Image_create style={styles.Image} url={images.photo} />
-              <Pressable
-                style={styles.createButton}
-                onPress={() => {
-                  console.log("image upload");
-                }}
-              >
-                <Text style={styles.createText}>업로드</Text>
-              </Pressable>
-            </View>
-          </View>
 
-          <Text style={styles.createStudyTitle_text}>참여자 목록</Text>
-          <View style={styles.userlist}>
-            <View style={styles.user}>
-              <Text>user1</Text>
+            <View>
+              <Text style={styles.viewImage}>이미지</Text>
+              <View style={styles.ImageBlock}>
+                <Image_create style={styles.Image} url={images.photo} />
+                <Pressable
+                  style={styles.createButton}
+                  onPress={() => {
+                    console.log("image upload");
+                  }}
+                >
+                  <Text style={styles.createText}>업로드</Text>
+                </Pressable>
+              </View>
             </View>
-              <Pressable
-                style={styles.getout}
-                onPress={() => {
-                  console.log("image upload");
-                }}
-              >
-                <Text style={styles.createText}>강퇴</Text>
-              </Pressable>
 
+            <Text style={styles.createStudyTitle_text}>참여자 목록</Text>
+            <View style={styles.userlist}>
               <View style={styles.user}>
-              <Text>user2</Text>
+                <Text>user1</Text>
               </View>
               <Pressable
                 style={styles.getout}
@@ -174,7 +160,7 @@ const ModifyScreen = ({ navigation }) => {
               </Pressable>
 
               <View style={styles.user}>
-              <Text>user3</Text>
+                <Text>user2</Text>
               </View>
               <Pressable
                 style={styles.getout}
@@ -184,11 +170,23 @@ const ModifyScreen = ({ navigation }) => {
               >
                 <Text style={styles.createText}>강퇴</Text>
               </Pressable>
-          </View>
-          <Text style={styles.createStudyTitle_text}>대기자 목록</Text>
-          <View style={styles.userlist}>
-          <View style={styles.user}>
-              <Text>user4</Text>
+
+              <View style={styles.user}>
+                <Text>user3</Text>
+              </View>
+              <Pressable
+                style={styles.getout}
+                onPress={() => {
+                  console.log("image upload");
+                }}
+              >
+                <Text style={styles.createText}>강퇴</Text>
+              </Pressable>
+            </View>
+            <Text style={styles.createStudyTitle_text}>대기자 목록</Text>
+            <View style={styles.userlist}>
+              <View style={styles.user}>
+                <Text>user4</Text>
               </View>
               <Pressable
                 style={styles.wait}
@@ -206,7 +204,7 @@ const ModifyScreen = ({ navigation }) => {
               >
                 <Text style={styles.createText}>거절</Text>
               </Pressable>
-          </View>
+            </View>
           </ScrollView>
         </View>
       </View>
@@ -224,13 +222,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   createBox: {
-    display:'flex',
-    width:'100%',
+    display: "flex",
+    width: "100%",
     //backgroundColor: '#FF9100',
     backgroundColor: "#CCCCCC",
     border: 2,
     borderRadius: 20,
-    overflow: 'auto',
+    overflow: "auto",
   },
   createStudyTitle: {
     flexDirection: "row",
@@ -238,13 +236,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   createStudyTitle_text: {
-    fontSize: "18px",
+    fontSize: 18,
     margin: 30,
     marginRight: 5,
     marginBottom: 0,
   },
   createStudyTitle_text_input: {
-    fontSize: "30px",
+    fontSize: 30,
   },
   viewAll: {
     flexDirection: "row",
@@ -264,20 +262,20 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    fontSize: "18px",
+    fontSize: 18,
   },
   textRight: {
-    fontSize: "18px",
+    fontSize: 18,
     marginTop: 20,
   },
   textDescription: {
-    fontSize: "18px",
+    fontSize: 18,
     marginTop: 0,
     marginLeft: 30,
   },
   input: {
     backgroundColor: "#F3F3F3",
-    fontSize: "18px",
+    fontSize: 18,
     marginTop: 10,
     paddingBottom: 110,
     marginLeft: 30,
@@ -287,7 +285,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   viewImage: {
-    fontSize: "18px",
+    fontSize: 18,
     marginTop: 20,
     marginLeft: 30,
   },
@@ -318,7 +316,7 @@ const styles = StyleSheet.create({
   },
   createText: {
     color: "black",
-    fontSize: "16px",
+    fontSize: 16,
     textAlign: "center",
   },
   joinStudy: {
@@ -330,24 +328,24 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   joinStudy_text: {
-    fontSize: "20px",
+    fontSize: 20,
   },
   userlist: {
-    flexWrap:'wrap',
+    flexWrap: "wrap",
     marginTop: 5,
     marginLeft: 25,
     flexDirection: "row",
     alignItems: "flex-end",
   },
-  user:{
+  user: {
     backgroundColor: "#F3F3F3",
-    padding:10,
+    padding: 10,
     borderRadius: 10,
-    width: '33%',
+    width: "33%",
     justifyContent: "center",
     marginBottom: 5,
   },
-  getout:{
+  getout: {
     backgroundColor: "#F3F3F3",
     height: 25,
     padding: 5,
@@ -359,7 +357,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
     marginBottom: 5,
   },
-  wait:{
+  wait: {
     backgroundColor: "#F3F3F3",
     height: 25,
     padding: 5,
@@ -368,9 +366,9 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     borderRadius: 10,
-    
+
     marginBottom: 5,
-  }
+  },
 });
 
 export default ModifyScreen;

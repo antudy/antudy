@@ -7,9 +7,10 @@
 import { FlatList } from "react-native";
 import * as React from "react";
 import { useCallback, useEffect, useState } from "react";
-import { loadStudy } from "../../firebaseConfig";
+import { db, loadData } from "../../firebaseConfig";
 import { Searchbar } from "react-native-paper";
 import SearchCard from "../components/SearchCard";
+import { collection, query } from "firebase/firestore";
 
 const SearchScreen = ({ navigation }) => {
   // 스터디들 목록
@@ -24,7 +25,8 @@ const SearchScreen = ({ navigation }) => {
 
   // 데이터 불러오기
   useEffect(() => {
-    loadStudy(setStudyList);
+    const study = query(collection(db, "study"));
+    loadData(study, setStudyList);
   }, []);
 
   // 입력할 때마다 데이터들의 name과 비교해서 포함하고 있으면 검색 결과에 포함
