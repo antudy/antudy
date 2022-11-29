@@ -39,7 +39,7 @@ import {
             <Pressable
               style={styles.adminModify_button}
               onPress={() => {
-                console.log("관리중인 스터디 수정하기");
+                console.log("참여중인 스터디 삭제 하기");
               }}
             >
               <Text style={styles.adminModify_text}>삭제</Text>

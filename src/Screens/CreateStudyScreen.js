@@ -97,14 +97,15 @@ const CreateStudyScreen = ({ navigation }) => {
 const user = auth.currentUser;
 const uid = user.uid;
 // console.log(uid);
+const studyId = uid + text;
 
 
   //새로운 스터디 등록하기 버튼 클릭 시
   const pressCreateStudyButton = () => {
     console.log("Press Button");
     //스터디 생성 정보 DB 저장
-    const ANTUDYRef = query(collection(db,"ANTUDY"));
-    addDoc(ANTUDYRef, { 
+    const ANTUDYRef = query(doc(db,"ANTUDY",studyId));
+    setDoc(ANTUDYRef, { 
       adminUid: `${uid}`, //관리자UserId
       adminTitle: `${text}`, //스터디 이름
       adminLocation: `${valueLocation}`, //위치
@@ -114,6 +115,17 @@ const uid = user.uid;
       adminImage: `${selectedImage}` //이미지
       //대기UserId, 참여UserId, TodoList는 스터디 생성 이후 추가.
       })
+    // const ANTUDYRef = query(collection(db,"ANTUDY"));
+    // addDoc(ANTUDYRef, { 
+    //   adminUid: `${uid}`, //관리자UserId
+    //   adminTitle: `${text}`, //스터디 이름
+    //   adminLocation: `${valueLocation}`, //위치
+    //   adminPeople: `${valuePeople}`, //참여가능인원수(MAX_참가자)
+    //   adminCategory: `${valueCategory}`, //카테고리
+    //   adminDescription: `${text2}`, //상세설명
+    //   adminImage: `${selectedImage}` //이미지
+    //   //대기UserId, 참여UserId, TodoList는 스터디 생성 이후 추가.
+    //   })
     .then(()=>{
       console.log("Document successfully written!", ANTUDYRef.id);
     })
