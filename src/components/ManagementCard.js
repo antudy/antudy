@@ -41,9 +41,7 @@ const ManagementCard = ({
           </Pressable>
           <Pressable
             style={styles.adminModify_button}
-            onPress={() => {
-              console.log("관리중인 스터디 수정하기");
-            }}
+            onPress={pressDeleteStudyButton}
           >
             <Text style={styles.adminModify_text}>삭제</Text>
           </Pressable>

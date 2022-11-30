@@ -70,8 +70,8 @@ const CreateStudyScreen = ({ navigation }) => {
     { label: "토익", value: "토익" },
   ]);
 
-  const [text, onChangeText] = React.useState("제목을 입력해주세요");
-  const [text2, onChangeText2] = React.useState("설명을 입력해주세요");
+  const [text, onChangeText] = React.useState("입력해주세요");
+  const [text2, onChangeText2] = React.useState("입력해주세요");
 
   //image 추가
   const [selectedImage, setSelectedImage] = useState(images.photo);
@@ -127,15 +127,15 @@ const CreateStudyScreen = ({ navigation }) => {
   
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View width={width / 1.1}>
+    <SafeAreaView style={styles.container} >
+      <View width={width / 1.1} >
         <View style={styles.createBox} height={height / 1.5}>
           <View style={styles.createStudyTitle}>
             <Text style={styles.createStudyTitle_text}>스터디명:</Text>
             <TextInput
               style={styles.createStudyTitle_text_input}
               onChangeText={onChangeText}
-              placeholder="입력해주세요"
+              placeholder="제목을 입력해주세요"
               value={text}
             />
           </View>
@@ -184,7 +184,7 @@ const CreateStudyScreen = ({ navigation }) => {
             <TextInput
               style={styles.input}
               onChangeText={onChangeText2}
-              placeholder="입력해주세요"
+              placeholder="설명을 입력해주세요"
               value={text2}
             />
           </View>
@@ -220,17 +220,21 @@ const CreateStudyScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  fullScreen: {
+    
+  },
   locationList: {
     display: "relative",
   },
   container: {
     flex: 1,
+    backgroundColor: "#FFB74D",
     alignItems: "center",
     justifyContent: "center",
   },
   createBox: {
     //backgroundColor: '#FF9100',
-    backgroundColor: "#CCCCCC",
+    backgroundColor: "#FFB74D",
     border: 2,
     borderRadius: 20,
   },
@@ -289,6 +293,7 @@ const styles = StyleSheet.create({
     paddingBottom: 110,
     marginLeft: 30,
     marginRight: 30,
+    borderColor: "#FFE0B2",
     borderWidth: 2,
     borderRadius: 10,
     padding: 10,
@@ -300,6 +305,7 @@ const styles = StyleSheet.create({
     marginLeft: 30,
   },
   ImageBlock: {
+    color: "#333333",
     flexDirection: "row",
     alignItems: "flex-end",
   },
