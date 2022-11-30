@@ -1,3 +1,5 @@
+import { arrayRemove, FieldValue, updateDoc, where, update, doc, deleteField, getFirestore } from "firebase/firestore";
+import { db, auth } from "../../firebaseConfig";
 import {
     useWindowDimensions,
     StyleSheet,
@@ -15,6 +17,29 @@ import {
   }) => {
     const width = useWindowDimensions().width;
     const height = useWindowDimensions().height;
+
+    //현재 userid 가져오기
+    const user = auth.currentUser;
+    const uid = user.uid;
+    // console.log(uid);
+
+    // const pressDeleteJoinButton = () => {
+    //   console.log("참여중인 스터디 삭제하기")
+    //   const ANTUDYJoinDelete = doc(db, "ANTUDY", uid+adminTitle);
+    //     ANTUDYJoinDelete.update({
+    //       joinUid: FieldValue.arrayRemove(uid)
+    //     })
+    //   }
+
+    //joinUid 필드 중 사용자의 uid 삭제 완료
+    const pressDeleteJoinButton = () => {
+      console.log("참여중인 스터디 삭제하기")
+      const ANTUDYJoinDelete = doc(db, "ANTUDY", uid+adminTitle);
+        updateDoc(ANTUDYJoinDelete, {
+          joinUid: arrayRemove(uid) //deleteField()
+        });
+      }
+    
   
     return (
       <View style={styles.adminList} width={width / 1.1}>
@@ -38,9 +63,10 @@ import {
           <View style={styles.adminModify_view}>
             <Pressable
               style={styles.adminModify_button}
-              onPress={() => {
-                console.log("참여중인 스터디 삭제 하기");
-              }}
+              onPress={
+                pressDeleteJoinButton
+                // console.log("참여중인 스터디 삭제 하기");
+              }
             >
               <Text style={styles.adminModify_text}>삭제</Text>
             </Pressable>

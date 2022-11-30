@@ -70,8 +70,8 @@ const CreateStudyScreen = ({ navigation }) => {
     { label: "토익", value: "토익" },
   ]);
 
-  const [text, onChangeText] = React.useState("제목을 입력해주세요");
-  const [text2, onChangeText2] = React.useState("설명을 입력해주세요");
+  const [text, onChangeText] = React.useState("입력해주세요");
+  const [text2, onChangeText2] = React.useState("입력해주세요");
 
   //image 추가
   const [selectedImage, setSelectedImage] = useState(images.photo);
@@ -140,15 +140,15 @@ const studyId = uid + text;
   
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View width={width / 1.1}>
+    <SafeAreaView style={styles.container} >
+      <View width={width / 1.1} >
         <View style={styles.createBox} height={height / 1.5}>
           <View style={styles.createStudyTitle}>
             <Text style={styles.createStudyTitle_text}>스터디명:</Text>
             <TextInput
               style={styles.createStudyTitle_text_input}
               onChangeText={onChangeText}
-              placeholder="입력해주세요"
+              placeholder="제목을 입력해주세요"
               value={text}
             />
           </View>
@@ -197,7 +197,7 @@ const studyId = uid + text;
             <TextInput
               style={styles.input}
               onChangeText={onChangeText2}
-              placeholder="입력해주세요"
+              placeholder="설명을 입력해주세요"
               value={text2}
             />
           </View>
@@ -233,17 +233,21 @@ const studyId = uid + text;
 };
 
 const styles = StyleSheet.create({
+  fullScreen: {
+    
+  },
   locationList: {
     display: "relative",
   },
   container: {
     flex: 1,
+    backgroundColor: "#FFB74D",
     alignItems: "center",
     justifyContent: "center",
   },
   createBox: {
     //backgroundColor: '#FF9100',
-    backgroundColor: "#CCCCCC",
+    backgroundColor: "#FFB74D",
     border: 2,
     borderRadius: 20,
   },
@@ -252,13 +256,15 @@ const styles = StyleSheet.create({
     alignItems: "baseline",
   },
   createStudyTitle_text: {
-    fontSize: "18px",
+    fontSize: "24px",
+    color: "#333333",
     margin: 30,
     marginRight: 5,
     marginBottom: 0,
   },
   createStudyTitle_text_input: {
-    fontSize: "30px",
+    fontSize: "24px",
+    color: "#FFFFFF",
   },
   viewAll: {
     flexDirection: "row",
@@ -278,6 +284,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
+    color: "#333333",
     fontSize: "18px",
   },
   textRight: {
@@ -285,27 +292,33 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   textDescription: {
+    color: "#333333",
     fontSize: "18px",
     marginTop: 0,
     marginLeft: 30,
   },
   input: {
-    backgroundColor: "#F3F3F3",
+    backgroundColor: "#FFB74D",
+    color: "#FFFFFF",
     fontSize: "18px",
+    fontColor: "#FFFFFF",
     marginTop: 10,
     paddingBottom: 110,
     marginLeft: 30,
     marginRight: 30,
+    borderColor: "#FFE0B2",
     borderWidth: 2,
     borderRadius: 10,
     padding: 10,
   },
   viewImage: {
+    color: "#333333",
     fontSize: "18px",
     marginTop: 20,
     marginLeft: 30,
   },
   ImageBlock: {
+    color: "#333333",
     flexDirection: "row",
     alignItems: "flex-end",
   },
@@ -330,7 +343,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   createText: {
-    color: "black",
+    color: "#333333",
     fontSize: "16px",
     textAlign: "center",
   },
@@ -343,6 +356,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   joinStudy_text: {
+    color: "#333333",
     fontSize: "20px",
   },
 });

@@ -89,7 +89,7 @@ const ManagementCard = ({
           </Pressable>
           <Pressable
             style={styles.adminModify_button}
-            onPress={ pressDeleteStudyButton}
+            onPress={pressDeleteStudyButton}
           >
             <Text style={styles.adminModify_text}>삭제</Text>
           </Pressable>
