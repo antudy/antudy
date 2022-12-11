@@ -1,4 +1,4 @@
-import { query, collection, getDocs, where } from "firebase/firestore";
+import { query, collection, getDocs, where, onSnapshot, QuerySnapshot } from "firebase/firestore";
 import { db, auth, loadData } from "../../firebaseConfig";
 import React, { useCallback, useState, useEffect } from "react";
 import {
@@ -41,7 +41,16 @@ const ManagementScreen = ({ navigation }) => {
       collection(db, "ANTUDY"),
       where("adminUid", "==", uid)
     );
-    loadData(ANTUDY, setAdminList);
+    const unsubscript = onSnapshot(ANTUDY, (querySnapshot) => {
+      const adminListData = [];
+      querySnapshot.forEach((doc) => {
+        adminListData.push(doc.data());
+      });
+      setAdminList(adminListData);
+    });
+
+    return () => unsubscript();
+    // loadData(ANTUDY, setAdminList);
   }, []);
 
   const renderItem = useCallback(

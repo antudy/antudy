@@ -1,4 +1,4 @@
-import { query, collection, doc, getDocs, where, updateDoc, deleteField, FieldValue, updateData, deleteDoc } from "firebase/firestore";
+import { query, collection, doc, onSnapshot, getDocs, where, updateDoc, deleteField, FieldValue, updateData, deleteDoc } from "firebase/firestore";
 import { db, auth } from "../../firebaseConfig";
 import {Alert, confirm} from "react-native";
 // import pressDeleteStudyButton from "./pressDeleteStudyButton";
