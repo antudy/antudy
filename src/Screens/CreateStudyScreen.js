@@ -71,11 +71,12 @@ const CreateStudyScreen = ({ navigation }) => {
     { label: "토익", value: "토익" },
   ]);
 
-  const [text, onChangeText] = React.useState("입력해주세요");
-  const [text2, onChangeText2] = React.useState("입력해주세요");
+  const [text, onChangeText] = React.useState("");
+  const [text2, onChangeText2] = React.useState("");
 
   //image 추가
   const [selectedImage, setSelectedImage] = useState(images.photo);
+
 
   const pickImageAsync = async () => {
    // No permissions request is necessary for launching the image library
@@ -94,6 +95,14 @@ const CreateStudyScreen = ({ navigation }) => {
   }
 };
 
+const [disabled, setDisabled] = useState(true);
+
+useEffect(() => {
+  setDisabled(!(text && text2 && valueLocation && valuePeople && valueCategory));
+}, [text, text2, valueLocation, valuePeople, valueCategory]);
+
+
+
 //현재 userid 가져오기
 const user = auth.currentUser;
 const uid = user.uid;
@@ -105,6 +114,7 @@ const studyId = uid + text;
   const pressCreateStudyButton = () => {
     console.log("Press Button");
     //스터디 생성 정보 DB 저장
+
     const ANTUDYRef = query(doc(db,"ANTUDY",studyId));
     setDoc(ANTUDYRef, { 
       adminUid: `${uid}`, //관리자UserId
@@ -137,10 +147,13 @@ const studyId = uid + text;
     .catch((error) => {
       console.error("Error writing document: ", error);
     })
+    
 
     //화면 전환
     navigation.navigate("Management");
   };
+
+
 
   
 
@@ -228,6 +241,7 @@ const studyId = uid + text;
           <Pressable
             style={styles.joinStudy_button}
             onPress={pressCreateStudyButton}
+            disabled={disabled}
           >
             <Text style={styles.joinStudy_text}>새로운 스터디 등록하기</Text>
           </Pressable>
