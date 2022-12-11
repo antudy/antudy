@@ -4,7 +4,6 @@ import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView, FlatList } from
 import React, {useEffect, useState, useCallback} from "react";
 import WaitStudyListCard from "../components/WaitStudyListCard";
 
-
 function StudyList() {
 
   const [waitStudyList, setWaitStudyList] = useState([]);
@@ -35,6 +34,7 @@ function StudyList() {
     ({ item }) => (
       <WaitStudyListCard
         adminTitle={item.adminTitle}
+        adminUid={item.adminUid}
         adminLocation={item.adminLocation}
         adminPeople={item.adminPeople}
         adminCategory={item.adminCategory}
@@ -48,30 +48,7 @@ function StudyList() {
   console.log(waitStudyCreate);
 
   return (
-    // <View style={styles.container}>
-    //   <View>
-    //     <View style={styles.list_container}>
-    //       <TouchableOpacity
-    //         onPress={() => alert("웹 프로그래밍 코딩 스터디을 눌렸습니다.")}
-    //         style={styles.study_button}
-    //       >
-    //         <Text style={styles.study_title}>웹 프로그래밍 코딩 스터디</Text>
-    //         <TouchableOpacity
-    //           onPress={() => alert("삭제합니다.")}
-    //           style={styles.delete_button}
-    //         >
-    //           <Text style={styles.delete_text}>삭제</Text>
-    //         </TouchableOpacity>
-    //       </TouchableOpacity>
-    //     </View>
-    //   </View>
-    // </View>
-    <SafeAreaView style={styles.container}>
-      {/* <ParticipatingCard 
-              // data={adminList}
-              // renderItem={renderItem}
-              // adminStudyCreate={adminStudyCreate}
-            /> */}
+    <SafeAreaView>
       <FlatList
         data={waitStudyList}
         renderItem={renderItem}
@@ -82,11 +59,6 @@ function StudyList() {
 }
 
 const styles = StyleSheet.create({
-  // container: {
-  //   // flex: 1,
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  // },
 });
 
 export default StudyList;

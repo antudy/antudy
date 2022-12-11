@@ -7,10 +7,12 @@ import {
     View,
     Text,
     TouchableOpacity,
+    Pressable,
   } from "react-native";
   
   const WaitStudyListCard = ({
     adminTitle,
+    adminUid,
   }) => {
     const width = useWindowDimensions().width;
     const height = useWindowDimensions().height;
@@ -18,25 +20,16 @@ import {
     //현재 userid 가져오기
     const user = auth.currentUser;
     const uid = user.uid;
-    // // console.log(uid);
 
-    // // const pressDeleteJoinButton = () => {
-    // //   console.log("참여중인 스터디 삭제하기")
-    // //   const ANTUDYJoinDelete = doc(db, "ANTUDY", uid+adminTitle);
-    // //     ANTUDYJoinDelete.update({
-    // //       joinUid: FieldValue.arrayRemove(uid)
-    // //     })
-    // //   }
-
-    // //joinUid 필드 중 사용자의 uid 삭제 완료
-    // const pressDeleteJoinButton = () => {
-    //   console.log("참여중인 스터디 삭제하기")
-    //   const ANTUDYJoinDelete = doc(db, "ANTUDY", uid+adminTitle);
-    //     updateDoc(ANTUDYJoinDelete, {
-    //       joinUid: arrayRemove(uid) //deleteField()
-    //     });
-    //   }
-    
+    //waitUid 필드 중 사용자의 uid 삭제 완료
+    const pressDeleteWaitButton = () => {
+        console.log("참여대기중인 스터디 삭제하기")
+        console.log(adminUid);
+        const ANTUDYWaitDelete = doc(db, "ANTUDY", adminUid+adminTitle);
+        updateDoc(ANTUDYWaitDelete, {
+            waitUid: arrayRemove(uid) //deleteField()
+        });
+        }
   
     return (
       <View style={styles.container}>
@@ -47,12 +40,12 @@ import {
             style={styles.study_button}
           >
             <Text style={styles.study_title}>{adminTitle}</Text>
-            <TouchableOpacity
-              onPress={() => alert("삭제합니다.")}
+            <Pressable
+              onPress={pressDeleteWaitButton}
               style={styles.delete_button}
             >
               <Text style={styles.delete_text}>삭제</Text>
-            </TouchableOpacity>
+            </Pressable>
           </TouchableOpacity>
         </View>
       </View>
