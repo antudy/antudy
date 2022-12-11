@@ -14,24 +14,24 @@ function HomeScreen({ navigation }) {
   const [studyList, setStudyList] = useState([]);
 
   useEffect(() => {
-    const study = query(collection(db, "study"));
+    const study = query(collection(db, "ANTUDY"));
     loadData(study, setStudyList);
   }, []);
 
   const renderItem = useCallback(({ item }) => {
     const pressStudyCard = () => {
       navigation.navigate("JoinStudy", {
-        studyName: item.name,
-        location: item.location,
-        members: `${item.currentMembers} / ${item.maxMembers}`,
-        category: item.category,
+        studyName: item.adminTitle,
+        location: item.adminLocation,
+        members: `${item.adminCurrentPeople} / ${item.adminPeople}`,
+        category: item.adminCategory,
       });
     };
     return (
       <StudyCard
-        name={item.name}
-        location={item.location}
-        person={`${item.currentMembers} / ${item.maxMembers}`}
+        name={item.adminTitle}
+        location={item.adminLocation}
+        person={`${item.adminCurrentPeople} / ${item.adminPeople}`}
         onPress={pressStudyCard}
       />
     );

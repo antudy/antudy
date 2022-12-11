@@ -20,6 +20,7 @@ import {
   Button,
 } from "react-native";
 import { auth } from "../../firebaseConfig";
+import { ScrollView } from 'react-native-gesture-handler';
 
 const CreateStudyScreen = ({ navigation }) => {
   const width = useWindowDimensions().width;
@@ -112,7 +113,11 @@ const studyId = uid + text;
       adminPeople: `${valuePeople}`, //참여가능인원수(MAX_참가자)
       adminCategory: `${valueCategory}`, //카테고리
       adminDescription: `${text2}`, //상세설명
-      adminImage: `${selectedImage}` //이미지
+      adminImage: `${selectedImage}`, //이미지
+      adminCurrentPeople: 0,
+      waitUid: [],
+      joinUid: [],
+      todolist: [],
       //대기UserId, 참여UserId, TodoList는 스터디 생성 이후 추가.
       })
     // const ANTUDYRef = query(collection(db,"ANTUDY"));
@@ -167,7 +172,7 @@ const studyId = uid + text;
                 setValue={setValueLocation}
                 setItems={setItemsLocation}
                 zIndex={9999}
-                style={{ width: 180 }}
+                style={{ width: 160 }}
                 // onChangeValue = {onChangeValue}
               />
               <DropDownPicker
@@ -178,7 +183,7 @@ const studyId = uid + text;
                 setValue={setValuePeople}
                 setItems={setItemsPeople}
                 zIndex={9998}
-                style={{ width: 180 }}
+                style={{ width: 160 }}
               />
               <DropDownPicker
                 open={openCategory}
@@ -188,7 +193,7 @@ const studyId = uid + text;
                 setValue={setValueCategory}
                 setItems={setItemsCategory}
                 zIndex={9997}
-                style={{ width: 180 }}
+                style={{ width: 160 }}
               />
             </View>
           </View>
@@ -201,7 +206,7 @@ const studyId = uid + text;
               value={text2}
             />
           </View>
-          <View>
+          <View style={{ marginBottom: 10 }}>
             <Text style={styles.viewImage}>이미지</Text>
             <View style={styles.ImageBlock}>
               {/* <Image_create style={styles.Image} url={images.photo} /> */}
@@ -240,7 +245,7 @@ const styles = StyleSheet.create({
     display: "relative",
   },
   container: {
-    flex: 1,
+    height: "100%",
     backgroundColor: "#FFB74D",
     alignItems: "center",
     justifyContent: "center",
@@ -258,7 +263,7 @@ const styles = StyleSheet.create({
   createStudyTitle_text: {
     fontSize: "24px",
     color: "#333333",
-    margin: 30,
+    marginLeft: 30,
     marginRight: 5,
     marginBottom: 0,
   },
@@ -321,6 +326,7 @@ const styles = StyleSheet.create({
     color: "#333333",
     flexDirection: "row",
     alignItems: "flex-end",
+    
   },
   Image: {
     backgroundColor: "#F3F3F3",
@@ -350,11 +356,12 @@ const styles = StyleSheet.create({
   joinStudy: {
     flexDirection: "column",
     backgroundColor: "white",
-    marginTop: 10,
+    marginTop: 20,
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
   },
+
   joinStudy_text: {
     color: "#333333",
     fontSize: "20px",
