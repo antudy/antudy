@@ -36,7 +36,7 @@ import {
       <View>
         <View style={styles.list_container}>
           <TouchableOpacity
-            onPress={() => alert("웹 프로그래밍 코딩 스터디을 눌렸습니다.")}
+            onPress={() => alert("'"+adminTitle+"'"+" 스터디는 승인 대기중 입니다.")}
             style={styles.study_button}
           >
             <Text style={styles.study_title}>{adminTitle}</Text>
