@@ -52,7 +52,7 @@ const MyInfo = ({ navigation }) => {
                     </TouchableOpacity>
                         <View style={{borderBottomColor:'#000000',borderBottomWidth:1}}></View>
                     <TouchableOpacity style={{backgroundColor:'#FFFFFF',padding:20,margin:12,borderRadius:8}}
-                    onPress={() => navigation.navigate("ModifyStudy")}
+                    onPress={() => navigation.navigate("ManageStudy")}
                     >   
                         <Text style={styles.buttonText}>관리중인 스터디 </Text>
                     </TouchableOpacity>
