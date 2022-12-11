@@ -1,4 +1,4 @@
-import { query, collection, getDocs, where, doc, setDoc, addDoc, getFirestore } from 'firebase/firestore';
+import { query, collection, getDocs, where, doc, setDoc, addDoc, getFirestore, onSnapshot } from 'firebase/firestore';
 import { db } from "../../firebaseConfig";
 import * as ImagePicker from 'expo-image-picker';
 // import * as SecureStore from 'expo-secure-store';
