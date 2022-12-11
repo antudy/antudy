@@ -1,3 +1,8 @@
+import { query, collection, doc, getDocs, where, updateDoc, deleteField, FieldValue, updateData, deleteDoc } from "firebase/firestore";
+import { db, auth } from "../../firebaseConfig";
+import {Alert, confirm} from "react-native";
+// import pressDeleteStudyButton from "./pressDeleteStudyButton";
+
 import {
   useWindowDimensions,
   StyleSheet,
@@ -5,6 +10,7 @@ import {
   Text,
   Pressable,
 } from "react-native";
+import { useEffect } from "react";
 
 const ManagementCard = ({
   adminTitle,
@@ -15,6 +21,45 @@ const ManagementCard = ({
 }) => {
   const width = useWindowDimensions().width;
   const height = useWindowDimensions().height;
+
+  //현재 userid 가져오기
+  const user = auth.currentUser;
+  const uid = user.uid;
+  // console.log(uid);
+
+  //관리중인 스터디 삭제
+  const pressDeleteStudyButton = () => {
+    console.log("관리중인 스터디 삭제하기");
+    const ANTUDYDelete = doc(db, "ANTUDY", uid+adminTitle);
+    deleteDoc(ANTUDYDelete)
+    // Alert.alert("정말로 삭제하시겠습니까?",[{onPress: () => deleteDoc(ANTUDYDelete)}])
+    .then(()=>{
+      console.log("Document successfully written!", ANTUDYDelete.id);
+      // deleteDoc(ANTUDYDelete)
+    })
+    .catch((error) => {
+      console.error("Error writing document: ", error);
+    })
+  }
+  // //관리중인 스터디 수정
+  // const pressDeleteStudyButton = () => {
+  //   console.log("관리중인 스터디 삭제하기");
+  //   const ANTUDYDelete = doc(db, "ANTUDY", uid+adminTitle);
+  //   updateDoc(ANTUDYDelete, {
+  //     aaa: "abc",
+  //     adminTitle: "abc"
+  //   })
+  //   .then(()=>{
+  //     console.log("Document successfully written!", ANTUDYDelete.id);
+  //   })
+  //   .catch((error) => {
+  //     console.error("Error writing document: ", error);
+  //   })
+  // }
+    // console.log("관리중인 스터디 삭제하기");
+    
+  
+
 
   return (
     <View style={styles.adminList} width={width / 1.1}>
@@ -41,9 +86,7 @@ const ManagementCard = ({
           </Pressable>
           <Pressable
             style={styles.adminModify_button}
-            onPress={() => {
-              console.log("관리중인 스터디 수정하기");
-            }}
+            onPress={pressDeleteStudyButton}
           >
             <Text style={styles.adminModify_text}>삭제</Text>
           </Pressable>

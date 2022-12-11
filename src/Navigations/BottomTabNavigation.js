@@ -46,7 +46,7 @@ const BottomTabNavigation = ({ navigation }) => {
       <Tab.Screen
         // 참여중 화면
         name="Join"
-        component={JoinScreen}
+        component={ParticipatingScreen}
         options={{
           title: "참여중",
           tabBarIcon: ({ color, size }) => (
