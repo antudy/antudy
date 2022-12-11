@@ -14,66 +14,71 @@ import {
   TextInput,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import ManagementCard from "../components/ManagementCard";
 
-const ModifyScreen = ({ navigation }) => {
+const ModifyScreen = ({ navigation , route}) => {
   const width = useWindowDimensions().width;
   const height = useWindowDimensions().height;
   //const {width, height} = useWindowDimensions();
 
-  const [openLocation, setOpenLocation] = useState(false);
-  const [openPeople, setOpenPeople] = useState(false);
-  const [openCategory, setOpenCategory] = useState(false);
+  const { adminTitle, adminLocation, adminPeople, adminCategory, adminImage} = route.params;
 
-  const [valueLocation, setValueLocation] = useState(null);
-  const [valuePeople, setValuePeople] = useState(null);
-  const [valueCategory, setValueCategory] = useState(null);
 
-  const [itemsLocation, setItemsLocation] = useState([
-    { label: "서울", value: "서울" },
-    { label: "인천", value: "인천" },
-    { label: "부산", value: "부산" },
-    { label: "대전", value: "대전" },
-    { label: "광주", value: "광주" },
-    { label: "대구", value: "대구" },
-    { label: "울산", value: "울산" },
-    { label: "경기도", value: "경기도" },
-    { label: "강원도", value: "강원도" },
-    { label: "충청북도", value: "충청북도" },
-    { label: "충청남도", value: "충청남도" },
-    { label: "전라북도", value: "전라북도" },
-    { label: "전라남도", value: "전라남도" },
-    { label: "경상북도", value: "경상북도" },
-    { label: "경상남도", value: "경상남도" },
-    { label: "제주", value: "제주" },
-    { label: "세종", value: "세종" },
-  ]);
-  const [itemsPeople, setItemsPeople] = useState([
-    { label: "1", value: "1" },
-    { label: "2", value: "2" },
-    { label: "3", value: "3" },
-    { label: "4", value: "4" },
-    { label: "5", value: "5" },
-    { label: "6", value: "6" },
-    { label: "7", value: "7" },
-    { label: "8", value: "8" },
-    { label: "9", value: "9" },
-    { label: "10", value: "10" },
-  ]);
-  const [itemsCategory, setItemsCategory] = useState([
-    { label: "IT/코딩", value: "IT/코딩" },
-    { label: "토익", value: "토익" },
-  ]);
+  // const [openLocation, setOpenLocation] = useState(false);
+  // const [openPeople, setOpenPeople] = useState(false);
+  // const [openCategory, setOpenCategory] = useState(false);
 
-  const [text, onChangeText] = React.useState("제목을 입력해주세요");
-  const [text2, onChangeText2] = React.useState("설명을 입력해주세요");
+  // const [valueLocation, setValueLocation] = useState(null);
+  // const [valuePeople, setValuePeople] = useState(null);
+  // const [valueCategory, setValueCategory] = useState(null);
 
-  //image 추가
-  const [photoUrl, setPhotoUrl] = useState(images.photo);
+  // const [itemsLocation, setItemsLocation] = useState([
+  //   { label: "서울", value: "서울" },
+  //   { label: "인천", value: "인천" },
+  //   { label: "부산", value: "부산" },
+  //   { label: "대전", value: "대전" },
+  //   { label: "광주", value: "광주" },
+  //   { label: "대구", value: "대구" },
+  //   { label: "울산", value: "울산" },
+  //   { label: "경기도", value: "경기도" },
+  //   { label: "강원도", value: "강원도" },
+  //   { label: "충청북도", value: "충청북도" },
+  //   { label: "충청남도", value: "충청남도" },
+  //   { label: "전라북도", value: "전라북도" },
+  //   { label: "전라남도", value: "전라남도" },
+  //   { label: "경상북도", value: "경상북도" },
+  //   { label: "경상남도", value: "경상남도" },
+  //   { label: "제주", value: "제주" },
+  //   { label: "세종", value: "세종" },
+  // ]);
+  // const [itemsPeople, setItemsPeople] = useState([
+  //   { label: "1", value: "1" },
+  //   { label: "2", value: "2" },
+  //   { label: "3", value: "3" },
+  //   { label: "4", value: "4" },
+  //   { label: "5", value: "5" },
+  //   { label: "6", value: "6" },
+  //   { label: "7", value: "7" },
+  //   { label: "8", value: "8" },
+  //   { label: "9", value: "9" },
+  //   { label: "10", value: "10" },
+  // ]);
+  // const [itemsCategory, setItemsCategory] = useState([
+  //   { label: "IT/코딩", value: "IT/코딩" },
+  //   { label: "토익", value: "토익" },
+  // ]);
+
+  // const [text, onChangeText] = React.useState("제목을 입력해주세요");
+  // const [text2, onChangeText2] = React.useState("설명을 입력해주세요");
+
+  // //image 추가
+  // const [photoUrl, setPhotoUrl] = useState(images.photo);
 
   const pressModifyButton = () => {
     console.log("Press Button");
     navigation.navigate("ModifyStudy");
   };
+  console.log(adminLocation)
 
   return (
     <SafeAreaView style={styles.container}>
@@ -81,7 +86,7 @@ const ModifyScreen = ({ navigation }) => {
         <View style={styles.createBox} height={height / 1.3}>
           <ScrollView>
             <View style={styles.createStudyTitle}>
-              <Text style={styles.createStudyTitle_text}>제주코딩</Text>
+              <Text style={styles.createStudyTitle_text}>{adminTitle}</Text>
               <Pressable
                 style={styles.createButton}
                 onPress={pressModifyButton}
@@ -96,7 +101,10 @@ const ModifyScreen = ({ navigation }) => {
                 <Text style={styles.text}>카테고리</Text>
               </View>
               <View style={styles.viewRight}>
-                <DropDownPicker
+                <Text style={styles.text}>{adminLocation}</Text>
+                <Text style={styles.text}>{adminPeople}</Text>
+                <Text style={styles.text}>{adminCategory}</Text>
+                {/* <DropDownPicker
                   open={openLocation}
                   value={valueLocation}
                   items={itemsLocation}
@@ -126,22 +134,22 @@ const ModifyScreen = ({ navigation }) => {
                   setItems={setItemsCategory}
                   zIndex={9997}
                   style={{ width: 150 }}
-                />
+                /> */}
               </View>
             </View>
 
             <View>
               <Text style={styles.viewImage}>이미지</Text>
               <View style={styles.ImageBlock}>
-                <Image_create style={styles.Image} url={images.photo} />
-                <Pressable
+                 <Image_create style={styles.Image} url={adminImage} />
+                {/*<Pressable
                   style={styles.createButton}
                   onPress={() => {
                     console.log("image upload");
                   }}
-                >
-                  <Text style={styles.createText}>업로드</Text>
-                </Pressable>
+                > */}
+                  {/* <Text style={styles.createText}>업로드</Text>
+                </Pressable> */}
               </View>
             </View>
 

@@ -54,7 +54,18 @@ const ManagementScreen = ({ navigation }) => {
   }, []);
 
   const renderItem = useCallback(
-    ({ item }) => (
+    ({ item }) => {
+      const pressModify= () => {
+        console.log("abc");
+        navigation.navigate("ModifyStudy", {
+          adminTitle : item.adminTitle,
+          adminLocation: item.adminLocation,
+          adminPeople: item.adminPeople,
+          adminCategory: item.adminCategory,
+          adminImage: item.adminImage,
+        })
+      }
+      return(
       <ManagementCard
         adminTitle={item.adminTitle}
         adminLocation={item.adminLocation}
@@ -62,7 +73,8 @@ const ManagementScreen = ({ navigation }) => {
         adminCategory={item.adminCategory}
         onPress={pressModify}
       />
-    ),
+      )
+      },
     []
   );
 

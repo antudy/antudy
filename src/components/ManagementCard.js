@@ -10,7 +10,8 @@ import {
   Text,
   Pressable,
 } from "react-native";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
+import ModifyScreen from "../Screens/ModifyScreen";
 
 const ManagementCard = ({
   adminTitle,
@@ -18,6 +19,7 @@ const ManagementCard = ({
   adminPeople,
   adminCategory,
   onPress,
+  navigation,
 }) => {
   const width = useWindowDimensions().width;
   const height = useWindowDimensions().height;
@@ -30,6 +32,7 @@ const ManagementCard = ({
   //관리중인 스터디 삭제
   const pressDeleteStudyButton = () => {
     console.log("관리중인 스터디 삭제하기");
+    console.log(adminLocation);
     const ANTUDYDelete = doc(db, "ANTUDY", uid+adminTitle);
     deleteDoc(ANTUDYDelete)
     // Alert.alert("정말로 삭제하시겠습니까?",[{onPress: () => deleteDoc(ANTUDYDelete)}])
@@ -41,25 +44,6 @@ const ManagementCard = ({
       console.error("Error writing document: ", error);
     })
   }
-  // //관리중인 스터디 수정
-  // const pressDeleteStudyButton = () => {
-  //   console.log("관리중인 스터디 삭제하기");
-  //   const ANTUDYDelete = doc(db, "ANTUDY", uid+adminTitle);
-  //   updateDoc(ANTUDYDelete, {
-  //     aaa: "abc",
-  //     adminTitle: "abc"
-  //   })
-  //   .then(()=>{
-  //     console.log("Document successfully written!", ANTUDYDelete.id);
-  //   })
-  //   .catch((error) => {
-  //     console.error("Error writing document: ", error);
-  //   })
-  // }
-    // console.log("관리중인 스터디 삭제하기");
-    
-  
-
 
   return (
     <View style={styles.adminList} width={width / 1.1}>
