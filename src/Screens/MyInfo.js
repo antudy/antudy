@@ -46,7 +46,7 @@ const MyInfo = ({ navigation }) => {
                     />
                 <View style={styles.IngBox}>
                     <TouchableOpacity style={{backgroundColor:'#FFFFFF',padding:20,margin:12,borderRadius:8,}}
-                    onPress={() => navigation.navigate("JoinStudy")}
+                    onPress={() => navigation.navigate("ParticipatingStudy")}
                     >
                         <Text style={styles.buttonText}>참여중인 스터디 </Text>
                     </TouchableOpacity>
