@@ -35,6 +35,7 @@ function HomeScreen({ navigation }) {
         members: `${item.adminCurrentPeople} / ${item.adminPeople}`,
         category: item.adminCategory,
         adminUid: item.adminUid,
+        adminDescription: item.adminDescription,
       });
     };
     return (

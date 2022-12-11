@@ -4,7 +4,7 @@ import { db, auth } from "../../firebaseConfig";
 import * as React from "react";
 
 function JoinStudyScreen({ navigation, route }) {
-  const { studyName, location, members, category, adminUid } = route.params;
+  const { studyName, location, members, category, adminUid, adminDescription} = route.params;
 
   //현재 userid 가져오기
   const user = auth.currentUser;
@@ -49,7 +49,7 @@ function JoinStudyScreen({ navigation, route }) {
         <View style={styles.study_explain}>
           <Text style={styles.text_explain}>스터디 상세설명</Text>
           <View style={styles.explain_container}>
-            <Text>스터디 상세 설명 내용</Text>
+            <Text>{adminDescription}</Text>
           </View>
         </View>
       </View>
