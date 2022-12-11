@@ -13,7 +13,7 @@ const StudyCard = ({ name, location, person, onPress }) => {
         <View style={styles.container}>
           <Image
             style={styles.image}
-            source={require("../../assets/grey.png")}
+            source={require("../../assets/antudy.png")}
           />
           <View style={[{ flex: 1 }, styles.rightContainer]}>
             <Text

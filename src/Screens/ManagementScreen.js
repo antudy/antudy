@@ -1,5 +1,5 @@
 import { query, collection, getDocs, where } from "firebase/firestore";
-import { db, auth } from "../../firebaseConfig";
+import { db, auth, loadData } from "../../firebaseConfig";
 import React, { useCallback, useState, useEffect } from "react";
 import {
   FlatList,
@@ -9,12 +9,12 @@ import {
 } from "react-native";
 import ManagementCard from "../components/ManagementCard";
 
-const ManagementScreen = ({navigation}) => {
+const ManagementScreen = ({ navigation }) => {
   const width = useWindowDimensions().width;
   const height = useWindowDimensions().height;
   const pressModify = () => {
-    navigation.navigate('ModifyStudy')
-  }
+    navigation.navigate("ModifyStudy");
+  };
 
   const [adminList, setAdminList] = useState([]);
 
@@ -41,16 +41,7 @@ const ManagementScreen = ({navigation}) => {
       collection(db, "ANTUDY"),
       where("adminUid", "==", uid)
     );
-    getDocs(ANTUDY)
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          setAdminList((prevState) => [...prevState, doc.data()]);
-          console.log(doc.data());
-        });
-      })
-      .catch((e) => {
-        console.log(`Error : ${e}`);
-      });
+    loadData(ANTUDY, setAdminList);
   }, []);
 
   const renderItem = useCallback(

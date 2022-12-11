@@ -27,9 +27,12 @@ export const signup = async ({ email, password }) => {
   return user;
 };
 
-export const loadStudy = (setState) => {
-  const study = query(collection(db, "study"));
-  getDocs(study)
+export const logout = async () => {
+  return await auth.signOut();
+};
+
+export const loadData = (data, setState) => {
+  getDocs(data)
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         setState((prevState) => [...prevState, doc.data()]);

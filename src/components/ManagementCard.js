@@ -81,10 +81,7 @@ const ManagementCard = ({
           <Text style={styles.adminItem_text}>{adminCategory}</Text>
         </View>
         <View style={styles.adminModify_view}>
-          <Pressable
-            style={styles.adminModify_button}
-            onPress={onPress}
-          >
+          <Pressable style={styles.adminModify_button} onPress={onPress}>
             <Text style={styles.adminModify_text}>관리</Text>
           </Pressable>
           <Pressable
@@ -123,10 +120,10 @@ const styles = StyleSheet.create({
     // backgroundColor: 'red',
   },
   adminTitle_text: {
-    fontSize: "30px",
+    fontSize: 30,
   },
   adminItem_text: {
-    fontSize: "18px",
+    fontSize: 18,
     // marginRight: 20,
   },
   adminLocation_view: {
@@ -152,7 +149,7 @@ const styles = StyleSheet.create({
   },
   adminModify_button: {},
   adminModify_text: {
-    fontSize: "18px",
+    fontSize: 18,
     marginLeft: 15,
   },
 });

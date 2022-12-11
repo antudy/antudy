@@ -7,13 +7,15 @@ import FloatingActionButton from "../components/FloatingActionButton";
 import HomeSwiper from "../components/HomeSwiper";
 import StudyCard from "../components/StudyCard";
 import { useCallback, useEffect, useState } from "react";
-import { loadStudy } from "../../firebaseConfig";
+import { db, loadData } from "../../firebaseConfig";
+import { collection, query } from "firebase/firestore";
 
 function HomeScreen({ navigation }) {
   const [studyList, setStudyList] = useState([]);
 
   useEffect(() => {
-    loadStudy(setStudyList);
+    const study = query(collection(db, "study"));
+    loadData(study, setStudyList);
   }, []);
 
   const renderItem = useCallback(({ item }) => {
@@ -21,7 +23,7 @@ function HomeScreen({ navigation }) {
       navigation.navigate("JoinStudy", {
         studyName: item.name,
         location: item.location,
-        members: item.members,
+        members: `${item.currentMembers} / ${item.maxMembers}`,
         category: item.category,
       });
     };
@@ -29,7 +31,7 @@ function HomeScreen({ navigation }) {
       <StudyCard
         name={item.name}
         location={item.location}
-        person={item.members}
+        person={`${item.currentMembers} / ${item.maxMembers}`}
         onPress={pressStudyCard}
       />
     );

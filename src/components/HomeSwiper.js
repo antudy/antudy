@@ -55,10 +55,10 @@ const HomeSwiper = () => {
         }}
         loop
       >
-        <SwiperImage source={require("../../assets/grey.png")} />
-        <SwiperImage source={require("../../assets/grey.png")} />
-        <SwiperImage source={require("../../assets/grey.png")} />
-        <SwiperImage source={require("../../assets/grey.png")} />
+        <SwiperImage source={require("../../assets/banner_1.jpg")} />
+        <SwiperImage source={require("../../assets/banner_2.jpg")} />
+        <SwiperImage source={require("../../assets/banner_3.jpg")} />
+        <SwiperImage source={require("../../assets/banner_4.jpg")} />
       </Swiper>
     </View>
   );
