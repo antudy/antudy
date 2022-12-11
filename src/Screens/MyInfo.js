@@ -36,7 +36,7 @@ const MyInfo = () => {
                 <TouchableOpacity style={{backgroundColor:'#FFFFFF',padding:20,margin:12,borderRadius:8}}
                 onPress={() => alert('연결!')}
                 >   
-                    <Text style={styles.buttonText}>일정 캘린더 </Text>
+                    <Text style={styles.buttonText}>관리중인 스터디 </Text>
                 </TouchableOpacity>
                     <View style={{borderBottomColor:'#000000',borderBottomWidth:1}}></View>
                 <TouchableOpacity style={{backgroundColor:'#FFFFFF',padding:20,margin:12,borderRadius:8,}}
