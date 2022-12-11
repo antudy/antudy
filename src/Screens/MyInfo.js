@@ -46,19 +46,19 @@ const MyInfo = ({ navigation }) => {
                     />
                 <View style={styles.IngBox}>
                     <TouchableOpacity style={{backgroundColor:'#FFFFFF',padding:20,margin:12,borderRadius:8,}}
-                    onPress={() => alert('연결!')}
+                    onPress={() => navigation.navigate("JoinStudy")}
                     >
                         <Text style={styles.buttonText}>참여중인 스터디 </Text>
                     </TouchableOpacity>
                         <View style={{borderBottomColor:'#000000',borderBottomWidth:1}}></View>
                     <TouchableOpacity style={{backgroundColor:'#FFFFFF',padding:20,margin:12,borderRadius:8}}
-                    onPress={() => alert('연결!')}
+                    onPress={() => navigation.navigate("ModifyStudy")}
                     >   
-                        <Text style={styles.buttonText}>일정 캘린더 </Text>
+                        <Text style={styles.buttonText}>관리중인 스터디 </Text>
                     </TouchableOpacity>
                         <View style={{borderBottomColor:'#000000',borderBottomWidth:1}}></View>
                     <TouchableOpacity style={{backgroundColor:'#FFFFFF',padding:20,margin:12,borderRadius:8,}}
-                    onPress={() => alert('연결!')}
+                    onPress={() => navigation.navigate("StudyList")}
                     >
                         <Text style={styles.buttonText}>승인대기중인 스터디 </Text>
                     </TouchableOpacity>

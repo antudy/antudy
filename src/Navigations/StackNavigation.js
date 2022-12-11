@@ -8,6 +8,7 @@ import {
   JoinStudyScreen,
   StudyListScreen,
   SearchScreen,
+  ManagementScreen,
 } from "../Screens";
 import ModifyScreen from "../Screens/ModifyScreen";
 
@@ -47,7 +48,7 @@ const StackNavigation = () => {
         <Stack.Screen name="StudyList" component={StudyListScreen} />
         <Stack.Screen name="CreateStudy" component={CreateStudyScreen} />
         <Stack.Screen name="Search" component={SearchScreen} />
-        <Stack.Screen name="ModifyStudy" component={ModifyScreen} />
+        <Stack.Screen name="ModifyStudy" component={ManagementScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
