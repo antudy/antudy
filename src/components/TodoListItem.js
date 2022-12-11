@@ -5,6 +5,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import ProgressBar from 'react-native-progress/Bar';
 
+
+
 const { width, height } = Dimensions.get("window");
 
 const TodoListItem = ({textValue, id, checked, onRemove, onToggle}) => {
@@ -25,7 +27,7 @@ const TodoListItem = ({textValue, id, checked, onRemove, onToggle}) => {
                 checked? styles.strikeText : styles.unstrikeText,]}>
                 {textValue}
                 <View style={styles.Barcontainer}>
-                <ProgressBar ProgressBar={1.0} width={200} height={10} color={"rgba(80, 65, 159, 0.8)"} marginTop={10} bouciness={0}/>
+                <ProgressBar width={200} height={10} color={"rgba(80, 65, 159, 0.8)"} marginTop={10} bouciness={0} progress={{checked}/10}/>
                 </View>
             </Text>
             <TouchableOpacity style={styles.buttonContainer}>
