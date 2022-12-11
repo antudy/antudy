@@ -14,7 +14,6 @@ import {
   ManagementScreen,
   MyInfo,
 } from "../Screens";
-
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigation = ({ navigation }) => {
@@ -47,7 +46,7 @@ const BottomTabNavigation = ({ navigation }) => {
       <Tab.Screen
         // 참여중 화면
         name="Join"
-        component={ParticipatingScreen}
+        component={JoinScreen}
         options={{
           title: "참여중",
           tabBarIcon: ({ color, size }) => (
