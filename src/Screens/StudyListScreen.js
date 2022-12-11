@@ -1,4 +1,4 @@
-import { query, collection, getDocs, where } from "firebase/firestore";
+import { query, collection, getDocs, where, onSnapshot } from "firebase/firestore";
 import { db, auth } from "../../firebaseConfig";
 import { StyleSheet, View, Text, TouchableOpacity, SafeAreaView, FlatList } from "react-native";
 import React, {useEffect, useState, useCallback} from "react";
@@ -18,16 +18,16 @@ function StudyList() {
       collection(db, "ANTUDY"),
       where("waitUid", "array-contains", uid)
     );
-    getDocs(ANTUDYWait)
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          setWaitStudyList((prevState) => [...prevState, doc.data()]);
-          console.log(doc.data());
-        });
-      })
-      .catch((e) => {
-        console.log(`Error : ${e}`);
+    const Waitunsubscript = onSnapshot(ANTUDYWait, (querySnapshot) => {
+      const waitListData = [];
+      querySnapshot.forEach((doc) => {
+        waitListData.push(doc.data());
       });
+      setWaitStudyList(waitListData);
+    });
+
+    return () => Waitunsubscript();
+    // loadData(ANTUDY, setAdminList);
   }, []);
 
   const renderItem = useCallback(
