@@ -1,10 +1,28 @@
 import { StyleSheet, View, Text, Image, Pressable } from "react-native";
+import { query, collection, doc, onSnapshot, getDocs, where, updateDoc, arrayUnion } from "firebase/firestore";
+import { db, auth } from "../../firebaseConfig";
 import * as React from "react";
 
-function JoinStudyScreen({ navigation, route }) {
+function JoinStudyScreen({ navigation, route, adminTitle }) {
   const { studyName, location, members, category } = route.params;
 
+  //현재 userid 가져오기
+  const user = auth.currentUser;
+  const uid = user.uid;
+
+  //스터디 참여하기 클릭시 DB의 waitUid에 저장
   const pressJoinButton = () => {
+    console.log("관리중인 스터디 삭제하기");
+    const ANTUDYJoin = doc(db, "ANTUDY", uid+"입력해주세요2");
+    updateDoc(ANTUDYJoin, {
+      waitUid: arrayUnion(uid)
+    })
+    .then(()=>{
+      console.log("Document successfully written!", ANTUDYJoin.id);
+    })
+    .catch((error) => {
+      console.error("Error writing document: ", error);
+    })
     navigation.navigate("StudyList");
   };
 
