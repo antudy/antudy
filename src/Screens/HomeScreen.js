@@ -8,14 +8,23 @@ import HomeSwiper from "../components/HomeSwiper";
 import StudyCard from "../components/StudyCard";
 import { useCallback, useEffect, useState } from "react";
 import { db, loadData } from "../../firebaseConfig";
-import { collection, query } from "firebase/firestore";
+import { collection, query, onSnapshot } from "firebase/firestore";
 
 function HomeScreen({ navigation }) {
   const [studyList, setStudyList] = useState([]);
 
   useEffect(() => {
     const study = query(collection(db, "ANTUDY"));
-    loadData(study, setStudyList);
+    const homeunsubscript = onSnapshot(study, (querySnapshot) => {
+      const homeListData = [];
+      querySnapshot.forEach((doc) => {
+        homeListData.push(doc.data());
+      });
+      setStudyList(homeListData);
+    });
+
+    return () => homeunsubscript();
+    // loadData(study, setStudyList);
   }, []);
 
   const renderItem = useCallback(({ item }) => {
