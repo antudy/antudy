@@ -21,6 +21,22 @@ import {
     const uid = user.uid;
     console.log(item_wait);
 
+    //대기자 목록 강퇴
+    const getoutWaitUid = () => {
+        console.log("대기자 강퇴하기");
+        const ANTUDYDeleteWait = doc(db, "ANTUDY", uid+"호");
+        updateDoc(ANTUDYDeleteWait, {//arrayRemove
+        waitUid: arrayRemove(item_wait)
+        })
+        .then(()=>{
+        console.log("Document successfully written!", ANTUDYDeleteWait.id);
+        })
+        .catch((error) => {
+        console.error("Error writing document: ", error);
+        })
+        // navigation.navigate("StudyList");
+    }
+
     return (
     <View style={styles.container}>
         <View style={styles.userlist}>
@@ -37,9 +53,7 @@ import {
             </Pressable>
             <Pressable
                 style={styles.wait}
-                onPress={() => {
-                    console.log("image upload");
-                }}
+                onPress={getoutWaitUid}
                 >
             <Text style={styles.createText}>거절</Text>
             </Pressable>
