@@ -1,4 +1,4 @@
-import { arrayRemove, FieldValue, updateDoc, where, update, doc, deleteField, getFirestore } from "firebase/firestore";
+import { arrayRemove, FieldValue, updateDoc, where, update, doc, deleteField, getFirestore, arrayUnion } from "firebase/firestore";
 import { db, auth } from "../../firebaseConfig";
 import React from "react";
 import {
@@ -20,6 +20,23 @@ import {
     const user = auth.currentUser;
     const uid = user.uid;
     console.log(item_wait);
+
+    //대기자 목록 승인
+    const getinWaitUid = () => {
+        console.log("대기자 강퇴하기");
+        const ANTUDYInsertWait = doc(db, "ANTUDY", uid+"호");
+        updateDoc(ANTUDYInsertWait, {//arrayRemove
+            waitUid: arrayRemove(item_wait),
+            joinUid: arrayUnion(item_wait)
+        })
+        .then(()=>{
+        console.log("Document successfully written!", ANTUDYInsertWait.id);
+        })
+        .catch((error) => {
+        console.error("Error writing document: ", error);
+        })
+        // navigation.navigate("StudyList");
+    }
 
     //대기자 목록 강퇴
     const getoutWaitUid = () => {
@@ -45,9 +62,7 @@ import {
             </View>
             <Pressable
                 style={styles.wait}
-                onPress={() => {
-                    console.log("image upload");
-                }}
+                onPress={getinWaitUid}
                 >
             <Text style={styles.createText}>승인</Text>
             </Pressable>
