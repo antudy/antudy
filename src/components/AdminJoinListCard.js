@@ -9,28 +9,48 @@ import {
     TouchableOpacity,
     Pressable,
   } from "react-native";
+import ModifyScreen from "../Screens/ModifyScreen";
   
-  const AdminWaitListCard = ({
+  const AdminJoinListCard = ({ adminTitle,
     item_join,
   }) => {
+    // const { adminUid } = route.params;
     const width = useWindowDimensions().width;
     const height = useWindowDimensions().height;
+    
 
     //현재 userid 가져오기
     const user = auth.currentUser;
     const uid = user.uid;
     console.log(item_join);
+    console.log(adminTitle)
+  
+
+    //참여자 목록 강퇴
+    const getoutJoinUid = () => {
+        console.log("참여자 강퇴하기");
+        const ANTUDYDeleteJoin = doc(db, "ANTUDY", uid+"호");
+        updateDoc(ANTUDYDeleteJoin, {//arrayRemove
+        joinUid: arrayRemove(item_join)
+        })
+        .then(()=>{
+        console.log("Document successfully written!", ANTUDYDeleteJoin.id);
+        })
+        .catch((error) => {
+        console.error("Error writing document: ", error);
+        })
+        // navigation.navigate("StudyList");
+    }
 
     return (
         <View style={styles.userlist}>
             <View style={styles.user}>
                 <Text>{item_join}</Text>
+                {/* <Text>{adminUid}</Text> */}
             </View>
             <Pressable
                 style={styles.getout}
-                onPress={() => {
-                    console.log("image upload");
-                }}
+                onPress={getoutJoinUid}
             >
             <Text style={styles.createText}>강퇴</Text>
             </Pressable>
@@ -200,4 +220,4 @@ import {
       }
   });
   
-  export default AdminWaitListCard;
+  export default AdminJoinListCard;

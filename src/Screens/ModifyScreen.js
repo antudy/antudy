@@ -19,7 +19,7 @@ import {
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import AdminWaitListCard from "../components/AdminWaitLIstCard";
-import AdminJoinListCard from "../components/AdmninJoinListCard";
+import AdminJoinListCard from "../components/AdminJoinListCard";
 
 const ModifyScreen = ({ navigation , route}) => {
   const width = useWindowDimensions().width;
@@ -34,6 +34,7 @@ const ModifyScreen = ({ navigation , route}) => {
   };
   // console.log(adminLocation)
 
+  const [adminList, setAdminList] = useState([]);
   const [adminWaitStudyList, setAdminWaitStudyList] = useState([]);
   const [adminJoinStudyList, setAdminJoinStudyList] = useState([]);
 
@@ -42,6 +43,9 @@ const ModifyScreen = ({ navigation , route}) => {
   const user = auth.currentUser;
   const uid = user.uid;
   // console.log(adminWaitStudyList);
+
+  console.log(adminTitle);
+
 
   //참여자목록 가져오기
   useEffect(() => {
@@ -75,6 +79,7 @@ const ModifyScreen = ({ navigation , route}) => {
       return(
       <AdminJoinListCard
         item_join={item}
+        adminTitle={item.adminTitle}
       />
       )
       },
