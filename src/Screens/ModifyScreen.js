@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import { query, collection, getDocs, where, onSnapshot, connectFirestoreEmulator } from "firebase/firestore";
+import { db, auth } from "../../firebaseConfig";
+
+import React, { useState, useEffect, useCallback } from "react";
 //drop down
 import DropDownPicker from "react-native-dropdown-picker";
 //image upload
@@ -12,73 +15,71 @@ import {
   Text,
   Pressable,
   TextInput,
+  FlatList
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import ManagementCard from "../components/ManagementCard";
+import AdminWaitListCard from "../components/AdminWaitLIstCard";
 
 const ModifyScreen = ({ navigation , route}) => {
   const width = useWindowDimensions().width;
   const height = useWindowDimensions().height;
   //const {width, height} = useWindowDimensions();
 
-  const { adminTitle, adminLocation, adminPeople, adminCategory, adminImage} = route.params;
-
-
-  // const [openLocation, setOpenLocation] = useState(false);
-  // const [openPeople, setOpenPeople] = useState(false);
-  // const [openCategory, setOpenCategory] = useState(false);
-
-  // const [valueLocation, setValueLocation] = useState(null);
-  // const [valuePeople, setValuePeople] = useState(null);
-  // const [valueCategory, setValueCategory] = useState(null);
-
-  // const [itemsLocation, setItemsLocation] = useState([
-  //   { label: "서울", value: "서울" },
-  //   { label: "인천", value: "인천" },
-  //   { label: "부산", value: "부산" },
-  //   { label: "대전", value: "대전" },
-  //   { label: "광주", value: "광주" },
-  //   { label: "대구", value: "대구" },
-  //   { label: "울산", value: "울산" },
-  //   { label: "경기도", value: "경기도" },
-  //   { label: "강원도", value: "강원도" },
-  //   { label: "충청북도", value: "충청북도" },
-  //   { label: "충청남도", value: "충청남도" },
-  //   { label: "전라북도", value: "전라북도" },
-  //   { label: "전라남도", value: "전라남도" },
-  //   { label: "경상북도", value: "경상북도" },
-  //   { label: "경상남도", value: "경상남도" },
-  //   { label: "제주", value: "제주" },
-  //   { label: "세종", value: "세종" },
-  // ]);
-  // const [itemsPeople, setItemsPeople] = useState([
-  //   { label: "1", value: "1" },
-  //   { label: "2", value: "2" },
-  //   { label: "3", value: "3" },
-  //   { label: "4", value: "4" },
-  //   { label: "5", value: "5" },
-  //   { label: "6", value: "6" },
-  //   { label: "7", value: "7" },
-  //   { label: "8", value: "8" },
-  //   { label: "9", value: "9" },
-  //   { label: "10", value: "10" },
-  // ]);
-  // const [itemsCategory, setItemsCategory] = useState([
-  //   { label: "IT/코딩", value: "IT/코딩" },
-  //   { label: "토익", value: "토익" },
-  // ]);
-
-  // const [text, onChangeText] = React.useState("제목을 입력해주세요");
-  // const [text2, onChangeText2] = React.useState("설명을 입력해주세요");
-
-  // //image 추가
-  // const [photoUrl, setPhotoUrl] = useState(images.photo);
+  const { adminTitle, adminLocation, adminPeople, adminCategory, adminImage, adminUid} = route.params;
 
   const pressModifyButton = () => {
     console.log("Press Button");
     navigation.navigate("ModifyStudy");
   };
-  console.log(adminLocation)
+  // console.log(adminLocation)
+
+  const [adminWaitStudyList, setAdminWaitStudyList] = useState([]);
+
+  //현재 userid 가져오기
+  const user = auth.currentUser;
+  const uid = user.uid;
+  // console.log(adminWaitStudyList);
+
+  //대기자목록 가져오기
+  useEffect(() => {
+    const ANTUDYAdminWait = query(
+      collection(db, "ANTUDY"),
+      where("adminTitle", "==", adminTitle),
+      where("adminUid", "==", adminUid),
+    );
+
+    const AdminWaitunsubscript = onSnapshot(ANTUDYAdminWait, (querySnapshot) => {
+      const adminWaitListData = [];
+      querySnapshot.forEach((doc) => {
+        const waitUidArray = doc.data().waitUid;
+          // waitUidArray.forEach(e => console.log(e))
+          waitUidArray.forEach((e) => {
+            // console.log(e);
+            adminWaitListData.push(e);
+          })
+          // console.log(doc.data().waitUid);
+      });
+      setAdminWaitStudyList(adminWaitListData);
+      console.log(adminWaitListData);
+    });
+
+    return () => AdminWaitunsubscript();
+  }, []);
+  // console.log(AdminWaitunsubscript);
+
+  const renderItem = useCallback(
+    ({ item }) => {
+      return(
+      <AdminWaitListCard
+        item={item}
+      />
+      )
+      },
+    []
+  );
+
+  const AdminWaitList = useCallback((item) => item.id, []);
+  // console.log(AdminWaitList);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -104,37 +105,6 @@ const ModifyScreen = ({ navigation , route}) => {
                 <Text style={styles.text}>{adminLocation}</Text>
                 <Text style={styles.text}>{adminPeople}</Text>
                 <Text style={styles.text}>{adminCategory}</Text>
-                {/* <DropDownPicker
-                  open={openLocation}
-                  value={valueLocation}
-                  items={itemsLocation}
-                  setOpen={setOpenLocation}
-                  setValue={setValueLocation}
-                  setItems={setItemsLocation}
-                  zIndex={9999}
-                  style={{ width: 150 }}
-                  // onChangeValue = {onChangeValue}
-                />
-                <DropDownPicker
-                  open={openPeople}
-                  value={valuePeople}
-                  items={itemsPeople}
-                  setOpen={setOpenPeople}
-                  setValue={setValuePeople}
-                  setItems={setItemsPeople}
-                  zIndex={9998}
-                  style={{ width: 150 }}
-                />
-                <DropDownPicker
-                  open={openCategory}
-                  value={valueCategory}
-                  items={itemsCategory}
-                  setOpen={setOpenCategory}
-                  setValue={setValueCategory}
-                  setItems={setItemsCategory}
-                  zIndex={9997}
-                  style={{ width: 150 }}
-                /> */}
               </View>
             </View>
 
@@ -142,19 +112,11 @@ const ModifyScreen = ({ navigation , route}) => {
               <Text style={styles.viewImage}>이미지</Text>
               <View style={styles.ImageBlock}>
                  <Image_create style={styles.Image} url={adminImage} />
-                {/*<Pressable
-                  style={styles.createButton}
-                  onPress={() => {
-                    console.log("image upload");
-                  }}
-                > */}
-                  {/* <Text style={styles.createText}>업로드</Text>
-                </Pressable> */}
               </View>
             </View>
 
             <Text style={styles.createStudyTitle_text}>참여자 목록</Text>
-            <View style={styles.userlist}>
+            {/* <View style={styles.userlist}>
               <View style={styles.user}>
                 <Text>user1</Text>
               </View>
@@ -190,29 +152,13 @@ const ModifyScreen = ({ navigation , route}) => {
               >
                 <Text style={styles.createText}>강퇴</Text>
               </Pressable>
-            </View>
+            </View> */}
             <Text style={styles.createStudyTitle_text}>대기자 목록</Text>
-            <View style={styles.userlist}>
-              <View style={styles.user}>
-                <Text>user4</Text>
-              </View>
-              <Pressable
-                style={styles.wait}
-                onPress={() => {
-                  console.log("image upload");
-                }}
-              >
-                <Text style={styles.createText}>승인</Text>
-              </Pressable>
-              <Pressable
-                style={styles.wait}
-                onPress={() => {
-                  console.log("image upload");
-                }}
-              >
-                <Text style={styles.createText}>거절</Text>
-              </Pressable>
-            </View>
+            <FlatList
+              data={adminWaitStudyList}
+              renderItem={renderItem}
+              keyExtractor={AdminWaitList}
+            />
           </ScrollView>
         </View>
       </View>

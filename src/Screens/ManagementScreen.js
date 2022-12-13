@@ -47,6 +47,7 @@ const ManagementScreen = ({ navigation }) => {
         adminListData.push(doc.data());
       });
       setAdminList(adminListData);
+      console.log(adminListData);
     });
 
     return () => unsubscript();
@@ -63,6 +64,7 @@ const ManagementScreen = ({ navigation }) => {
           adminPeople: item.adminPeople,
           adminCategory: item.adminCategory,
           adminImage: item.adminImage,
+          adminUid: item.adminUid,
         })
       }
       return(

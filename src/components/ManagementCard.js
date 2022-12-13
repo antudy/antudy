@@ -11,7 +11,6 @@ import {
   Pressable,
 } from "react-native";
 import { useEffect, useCallback } from "react";
-import ModifyScreen from "../Screens/ModifyScreen";
 
 const ManagementCard = ({
   adminTitle,
