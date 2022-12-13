@@ -11,7 +11,7 @@ import {
   } from "react-native";
   
   const AdminWaitListCard = ({
-    item_wait,
+    item_join,
   }) => {
     const width = useWindowDimensions().width;
     const height = useWindowDimensions().height;
@@ -19,32 +19,22 @@ import {
     //현재 userid 가져오기
     const user = auth.currentUser;
     const uid = user.uid;
-    console.log(item_wait);
+    console.log(item_join);
 
     return (
-    <View style={styles.container}>
         <View style={styles.userlist}>
             <View style={styles.user}>
-                <Text>{item_wait}</Text>
+                <Text>{item_join}</Text>
             </View>
             <Pressable
-                style={styles.wait}
+                style={styles.getout}
                 onPress={() => {
                     console.log("image upload");
                 }}
-                >
-            <Text style={styles.createText}>승인</Text>
+            >
+            <Text style={styles.createText}>강퇴</Text>
             </Pressable>
-            <Pressable
-                style={styles.wait}
-                onPress={() => {
-                    console.log("image upload");
-                }}
-                >
-            <Text style={styles.createText}>거절</Text>
-            </Pressable>
-        </View>
-    </View>
+      </View>
     );
   };
   

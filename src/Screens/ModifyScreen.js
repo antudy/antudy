@@ -19,6 +19,7 @@ import {
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import AdminWaitListCard from "../components/AdminWaitLIstCard";
+import AdminJoinListCard from "../components/AdmninJoinListCard";
 
 const ModifyScreen = ({ navigation , route}) => {
   const width = useWindowDimensions().width;
@@ -34,11 +35,54 @@ const ModifyScreen = ({ navigation , route}) => {
   // console.log(adminLocation)
 
   const [adminWaitStudyList, setAdminWaitStudyList] = useState([]);
+  const [adminJoinStudyList, setAdminJoinStudyList] = useState([]);
+
 
   //현재 userid 가져오기
   const user = auth.currentUser;
   const uid = user.uid;
   // console.log(adminWaitStudyList);
+
+  //참여자목록 가져오기
+  useEffect(() => {
+    const ANTUDYAdminJoin = query(
+      collection(db, "ANTUDY"),
+      where("adminTitle", "==", adminTitle),
+      where("adminUid", "==", adminUid),
+    );
+
+    const AdminJoinunsubscript = onSnapshot(ANTUDYAdminJoin, (querySnapshot) => {
+      const adminJoinListData = [];
+      querySnapshot.forEach((doc) => {
+        const joinUidArray = doc.data().joinUid;
+          // waitUidArray.forEach(e => console.log(e))
+          joinUidArray.forEach((e) => {
+            // console.log(e);
+            adminJoinListData.push(e);
+          })
+          // console.log(doc.data().waitUid);
+      });
+      setAdminJoinStudyList(adminJoinListData);
+      console.log(adminJoinListData);
+    });
+
+    return () => AdminJoinunsubscript();
+  }, []);
+  // console.log(AdminWaitunsubscript);
+
+  const renderItem_join = useCallback(
+    ({ item }) => {
+      return(
+      <AdminJoinListCard
+        item_join={item}
+      />
+      )
+      },
+    []
+  );
+
+  const AdminJoinList = useCallback((item_join) => item_join.id, []);
+  // console.log(AdminWaitList);
 
   //대기자목록 가져오기
   useEffect(() => {
@@ -67,18 +111,18 @@ const ModifyScreen = ({ navigation , route}) => {
   }, []);
   // console.log(AdminWaitunsubscript);
 
-  const renderItem = useCallback(
+  const renderItem_wait = useCallback(
     ({ item }) => {
       return(
       <AdminWaitListCard
-        item={item}
+        item_wait={item}
       />
       )
       },
     []
   );
 
-  const AdminWaitList = useCallback((item) => item.id, []);
+  const AdminWaitList = useCallback((item_wait) => item_wait.id, []);
   // console.log(AdminWaitList);
 
   return (
@@ -87,7 +131,7 @@ const ModifyScreen = ({ navigation , route}) => {
         <View style={styles.createBox} height={height / 1.3}>
           <ScrollView>
             <View style={styles.createStudyTitle}>
-              <Text style={styles.createStudyTitle_text}>{adminTitle}</Text>
+              <Text style={styles.createStudyTitle_text_T}>{adminTitle}</Text>
               <Pressable
                 style={styles.createButton}
                 onPress={pressModifyButton}
@@ -116,49 +160,17 @@ const ModifyScreen = ({ navigation , route}) => {
             </View>
 
             <Text style={styles.createStudyTitle_text}>참여자 목록</Text>
-            {/* <View style={styles.userlist}>
-              <View style={styles.user}>
-                <Text>user1</Text>
-              </View>
-              <Pressable
-                style={styles.getout}
-                onPress={() => {
-                  console.log("image upload");
-                }}
-              >
-                <Text style={styles.createText}>강퇴</Text>
-              </Pressable>
-
-              <View style={styles.user}>
-                <Text>user2</Text>
-              </View>
-              <Pressable
-                style={styles.getout}
-                onPress={() => {
-                  console.log("image upload");
-                }}
-              >
-                <Text style={styles.createText}>강퇴</Text>
-              </Pressable>
-
-              <View style={styles.user}>
-                <Text>user3</Text>
-              </View>
-              <Pressable
-                style={styles.getout}
-                onPress={() => {
-                  console.log("image upload");
-                }}
-              >
-                <Text style={styles.createText}>강퇴</Text>
-              </Pressable>
-            </View> */}
+              <FlatList
+                data={adminJoinStudyList}
+                renderItem={renderItem_join}
+                keyExtractor={AdminJoinList}
+              />
             <Text style={styles.createStudyTitle_text}>대기자 목록</Text>
-            <FlatList
-              data={adminWaitStudyList}
-              renderItem={renderItem}
-              keyExtractor={AdminWaitList}
-            />
+              <FlatList
+                data={adminWaitStudyList}
+                renderItem={renderItem_wait}
+                keyExtractor={AdminWaitList}
+              />
           </ScrollView>
         </View>
       </View>
@@ -195,8 +207,11 @@ const styles = StyleSheet.create({
     marginRight: 5,
     marginBottom: 0,
   },
-  createStudyTitle_text_input: {
-    fontSize: 30,
+  createStudyTitle_text_T: {
+    fontSize: 25,
+    margin: 30,
+    marginRight: 5,
+    marginBottom: 0,
   },
   viewAll: {
     flexDirection: "row",
